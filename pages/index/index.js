@@ -71,13 +71,18 @@ Page({
     });
   },
   onPageScroll: function (t) {
+
     var that = this;
-    console.log(t)
-    var chlid = that.selectComponent('.rec')
-    chlid.ZJonPageScroll(t.scrollTop)
-    that.setData({
-        scrollTop:t.scrollTop
-      })
+    if(that.data.currentTab == 1 ){
+        console.log(t)
+        var chlid = that.selectComponent('.rec')
+        chlid.ZJonPageScroll(t.scrollTop)
+        that.setData({
+            scrollTop:t.scrollTop
+          })
+
+    }
+  
   
   },
 
@@ -122,16 +127,7 @@ Page({
     }
 
   },
-  onPageScroll: function (t) {
-    var that = this;
-    console.log(t)
-    var chlid = that.selectComponent('.rec')
-    chlid.ZJonPageScroll(t.scrollTop)
-    that.setData({
-        scrollTop:t.scrollTop
-      })
-  
-  },
+ 
   /**
    * 页面上拉触底事件的处理函数
    */

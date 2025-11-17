@@ -249,7 +249,7 @@
                 </view>
             </view>
         </view>
-        <nav></nav>
+       
     </block>
     <view wx:for="{{ssq.detail.top_tab}}" wx:for-index="idx" wx:key="idx" >
     <view hidden="{{currentTab!=idx}}">

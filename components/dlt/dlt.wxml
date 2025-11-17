@@ -29,22 +29,10 @@
             </view>
         </view>
         <view class="timebox">
-        
+
             <view class="open-time">距{{lastIssue.Name}}期开奖:</view>
             <countdown wx:if="{{a}}" class="time" lasttime='{{lastIssue.NextDate.n_date_time}}'></countdown>
-
-       
-          
         </view>
-
-
-
-
-
-
-
-
-
     </view>
 
     <view class="sale-info-title">

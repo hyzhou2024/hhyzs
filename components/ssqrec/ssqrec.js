@@ -30,7 +30,7 @@ Component({
         this.animation = wx.createAnimation({
                 timingFunction: "ease"
             }),
-        this.animation1 = wx.createAnimation({})
+            this.animation1 = wx.createAnimation({})
         this.animation2 = wx.createAnimation({})
         this.animation3 = wx.createAnimation({})
         this.animation4 = wx.createAnimation({})
@@ -94,17 +94,17 @@ Component({
             let that = this;
             console.log(scrollTop)
             var chlid = that.selectComponent('.ssqtq')
-    chlid.ZJonPageScroll(scrollTop)
-          },
+            chlid.ZJonPageScroll(scrollTop)
+        },
         swichNav: async function (e) {
             var that = this
             var id = e.currentTarget.dataset.id;
             console.log(id)
             if (this.data.currentTab === e) return 0;
             that.setData({
-              currentTab: id,
+                currentTab: id,
             });
-          },
+        },
         // 热码
         animate1: function () {
             var that = this

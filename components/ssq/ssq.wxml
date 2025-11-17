@@ -2,54 +2,115 @@
 
 
 <view class='container1' wx:if="{{config.showLottery}}">
+<!-- 开奖号码和销售信息组件 - 酷炫优化 -->
+<view class="lottery-container">
   <!-- 开奖号码 -->
-  <view class="open-number-box">
-    <view  wx:if="{{ssq.detail.OpenNumber}}">
-      <text>第<text id='newLastOpenIssueName'>{{ssq.detail.Name}}</text>期开奖号码</text>
-      <view class='open-number'>
-        <block wx:for="{{ssq.detail.OpenNumber.hq}}" wx:for-item="Num" wx:key="hq">
-          <text>{{Num}}</text>
-        </block>
-        <block wx:for="{{ssq.detail.OpenNumber.lq}}" wx:for-item="Num" wx:key="lq">
-          <text class='blue-ball'>{{Num}}</text>
-        </block>
-       <navigator url='../lotterylist/lotterylist?lotId=5&lotName=双色球往期&typeId=1' class='moveinfo'>
-          <image src='../../images/youjiantou.png'></image>
+  <view class="lottery-result">
+    <view class="lottery-card">
+      <!-- 霓虹边框效果 -->
+      <view class="neon-border"></view>
+      <view class="card-glow"></view>
+      
+      <view class="lottery-header">
+        <view class="issue-info">
+          <text class="issue-text">第</text>
+          <text class="issue-number">{{ssq.detail.Name}}</text>
+          <text class="issue-text">期</text>
+          <view class="status-badge" wx:if="{{ssq.detail.OpenNumber}}">
+            <text class="status-text">开奖号码</text>
+            <view class="status-pulse"></view>
+          </view>
+          <view class="status-badge drawing" wx:else>
+            <text class="status-text">正在开奖</text>
+            <view class="status-pulse"></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="numbers-container">
+        <view class="numbers-display">
+          <!-- 已开奖状态 -->
+          <block wx:if="{{ssq.detail.OpenNumber}}">
+            <view class="red-numbers">
+              <view class="number-ball red" wx:for="{{ssq.detail.OpenNumber.hq}}" wx:key="index">
+                <text class="number-text">{{item}}</text>
+                <view class="ball-glow"></view>
+              </view>
+            </view>
+            <view class="blue-numbers">
+              <view class="number-ball blue" wx:for="{{ssq.detail.OpenNumber.lq}}" wx:key="index">
+                <text class="number-text">{{item}}</text>
+                <view class="ball-glow"></view>
+              </view>
+            </view>
+          </block>
+          
+          <!-- 未开奖状态 -->
+          <block wx:else>
+            <view class="red-numbers">
+              <view class="number-ball unknown" wx:for="{{[1,2,3,4,5,6]}}" wx:key="*this">
+                <text class="number-text">?</text>
+                <view class="ball-glow"></view>
+              </view>
+            </view>
+            <view class="blue-numbers">
+              <view class="number-ball blue unknown" wx:for="{{[1]}}" wx:key="*this">
+                <text class="number-text">?</text>
+                <view class="ball-glow"></view>
+              </view>
+            </view>
+          </block>
+        </view>
+
+        <!-- 历史开奖入口 -->
+        <navigator class="history-link" url="../lotterylist/lotterylist?lotId=5&lotName=双色球往期&typeId=1">
+          <text class="link-text">往期开奖</text>
+          <view class="arrow-icon">››</view>
+          <view class="link-glow"></view>
         </navigator>
       </view>
     </view>
-    <view wx:else>
-      <text>第<text id='newLastOpenIssueName'>{{ssq.detail.Name}}</text>期正在开奖</text>
-      <view class='open-number'>
-        <text>?</text>
-        <text>?</text>
-        <text>?</text>
-        <text>?</text>
-        <text>?</text>
-        <text>?</text>
-        <text class='blue-ball'>?</text>
+  </view>
+ 
+  <!-- 销售信息 -->
+  <view class="sales-info">
+    <view class="sales-card">
+      <view class="sales-grid">
+        <view class="sales-item">
+          <view class="sales-icon">💰</view>
+          <view class="sales-content">
+            <text class="sales-label">全国销量</text>
+            <text class="sales-value">{{ssq.detail.ySales}}亿元</text>
+          </view>
+          <view class="sales-wave"></view>
+        </view>
+        
+        <view class="sales-item prize-pool">
+          <view class="sales-icon">🏆</view>
+          <view class="sales-content">
+            <text class="sales-label">全国奖池</text>
+            <text class="sales-value">{{ssq.detail.yPrizepool}}亿元</text>
+          </view>
+          <view class="sales-wave"></view>
+        </view>
       </view>
     </view>
-  
   </view>
-  <!-- 销售信息 -->
-  <view class="sale-info-box sale-info-item" style="height:130rpx;">
-        <view style="height:130rpx;">
-            <text style="display:block;height:65rpx;line-height:65rpx;color:#666;  border-top: 1rpx solid #152e52;">全国销量</text>
-            <text style="display:block;height:65rpx;line-height:65rpx;color:#ff6a6e;">{{ssq.detail.Sales}}元</text>
-        </view>
-        <view style="height:130rpx;">
-            <text style="display:block;height:65rpx;line-height:65rpx;color:#666;  border-top: 1rpx solid #152e52;">全国奖池</text>
-            <text style="display:block;height:65rpx;line-height:65rpx;color:#ff6a6e;">{{ssq.detail.PoolMoney}}元</text>
+  <view class="map-content" wx:if="1">
+        <view class="contents">
+            <text class="one">一等奖省份分布</text>
+            <view wx:if="{{ssq.detail.first_prize_province.length>0&&item.first_prize>0}}" wx:for="{{ssq.detail.first_prize_province}}" wx:key="index">
+                <view class="small-logo" data-first="{{item.first_prize}}" data-issue="{{item.issue}}" data-lotteryId="{{item.lotteryId}}" data-province="{{item.province}}" data-sales="{{item.sales}}" style="top:{{item.top}};left:{{item.left}}">
+                    <image src="https://minidataservice.com/images/fc/cicle.png"></image>
+                    <text>{{item.first_prize}}</text>
+                </view>
+            </view>
+            <image class="lage-image" src="https://minidataservice.com/images/fc/china.png"></image>
         </view>
     </view>
-
-   
+    
 </view>
-
-
-
-
+<nav></nav>
 <view class="bonus-table">
         <view class="bonus-item item1">
             <view class="bigsize">奖级</view>
@@ -169,6 +230,13 @@
             <view>{{ssq.detail.PrizeGrades[5].typemoney}}</view>
         </view> 
 </view>
+   
+</view>
+
+
+
+
+
 
 
 

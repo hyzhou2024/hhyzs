@@ -8,8 +8,8 @@
 
 <view wx:for="{{result}}" wx:for-index="idx" wx:key="idx" >
     <view hidden="{{currentTab!=idx}}">
-        <ssqrec wx:if="{{item.tab_name == '推荐'&& item.rec == '双色球'}}" ssq="{{item}}" config="{{config}}" class="rec"></ssqrec> 
-        <ssqv1 wx:if="{{item.tab_name == '双色球'}}" ssq="{{item}}" config="{{config}}"></ssqv1> 
+        <ssq wx:if="{{item.tab_name == '推荐'&& item.rec == '双色球'}}" ssq="{{item}}" config="{{config}}"></ssq> 
+        <ssqrec wx:if="{{item.tab_name == '双色球'}}" ssq="{{item}}" config="{{config}}" class="rec"></ssqrec> 
         <dlt wx:if="{{item.tab_name == '大乐透'}}" ssq="{{item}}" config="{{config}}"></dlt>
         <fc3d wx:if="{{item.tab_name == '福彩3D'}}" ssq="{{item}}" config="{{config}}"></fc3d>
     </view>

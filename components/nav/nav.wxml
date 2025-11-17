@@ -1,20 +1,66 @@
-<!--components/nav/nav.wxml-->
-<view class="rec">
-    <view class="list_des">
-        <view class="top-itempro" style="color:#fff;width: 20%;background: #e60013;border-radius: 5%;">选号推荐</view>
-        <view>
-            <navigator class="info_list" url="/pages/tool/tool">更多>></navigator>
+<!-- components/nav/nav.wxml -->
+<view class="nav-container">
+    <!-- 标题区域 -->
+    <view class="nav-header">
+        <view class="nav-title-wrapper">
+            <view class="nav-title-badge">
+                <text class="badge-icon">🎯</text>
+                选号推荐
+            </view>
+            <navigator class="nav-more" url="/pages/tool/tool">
+                更多<text class="more-arrow">››</text>
+            </navigator>
         </view>
     </view>
-    <view class="iconbox">
-        <view class="ritem" wx:for="{{iconList}}" wx:for-index="idx" wx:key="idx">
-            <navigator appId="{{item.appid}}" class="iconbox_one" openType="navigate" path="{{item.path}}" target="miniProgram" version="release" wx:if="{{item.type=='miniprogram'}}">
-                <image data-id="{{item}}" mode="widthFix" src="{{item.iconurl}}"></image>
-                <view data-id="{{item.name}}">{{item.name}}</view>
+    
+    <!-- 4列图标导航区域 -->
+    <view class="nav-grid-4cols">
+        <view 
+            class="nav-item {{index % 4 === 3 ? 'last-in-row' : ''}}" 
+            wx:for="{{iconList}}" 
+            wx:key="id"
+            wx:for-index="idx"
+        >
+            <!-- 小程序跳转 -->
+            <navigator 
+                class="item-link"
+                appId="{{item.appid}}"
+                openType="navigate"
+                path="{{item.path}}"
+                target="miniProgram"
+                version="release"
+                wx:if="{{item.type === 'miniprogram'}}"
+                hover-class="item-hover"
+                bindtap="onItemTap"
+                data-item="{{item}}"
+                data-index="{{idx}}"
+            >
+                <view class="item-card">
+                    <view class="icon-container">
+                        <image class="item-icon" mode="aspectFit" src="{{item.iconurl}}" lazy-load="true"></image>
+                        <view class="item-badge" wx:if="{{item.badge}}">{{item.badge}}</view>
+                    </view>
+                    <view class="item-name">{{item.name}}</view>
+                </view>
             </navigator>
-            <navigator  url="{{item.path}}" wx:if="{{item.type=='navigation'}}">
-                <image data-id="{{item}}" mode="widthFix" src="{{item.iconurl}}"></image>
-                <view data-id="{{item.name}}">{{item.name}}</view>
+            
+            <!-- 普通页面跳转 -->
+            <navigator 
+                class="item-link"
+                url="{{item.path}}"
+                wx:if="{{item.type === 'navigation'}}"
+                hover-class="item-hover"
+                bindtap="onItemTap"
+                data-item="{{item}}"
+                data-index="{{idx}}"
+            >
+                <view class="item-card">
+                    <view class="icon-container">
+                        <image class="item-icon" mode="aspectFit" src="{{item.iconurl}}" lazy-load="true"></image>
+                        <view class="item-badge" wx:if="{{item.badge}}">{{item.badge}}</view>
+                    </view>
+                    <view class="item-name">{{item.name}}</view>
+                </view>
             </navigator>
         </view>
     </view>
