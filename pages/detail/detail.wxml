@@ -1,0 +1,54 @@
+
+
+<!-- 文章详情 -->
+<view class="bg-white">
+  <view class="cu-card dynamic no-card">
+    <view class="cu-item shadow">
+      <view class='text-content margin-top-sm'>{{post.title}}</view>
+      <!-- <view class="grid col-1 flex-sub padding-lr">
+        <view class="bg-img only-img" style="background-image:url({{post.defaultImageUrl}})" />
+      </view> -->
+      <view class='text-gray text-sm text-right padding'>
+        <text class="cuIcon-timefill" />
+        {{post.createTime}}
+        <text class="cuIcon-attentionfill" />
+        {{post.totalVisits}}
+        <text class="cuIcon-appreciatefill" />
+        {{post.totalZans}}
+        <text class="cuIcon-messagefill" />
+        {{post.totalComments}}
+      </view>
+    </view>
+  </view>
+  <view class="detail-body" style="height:{{hideArticle}}" wx:if="{{post.sourceFrom != 'haokan'}}">
+    <towxml nodes="{{post.content}}"/>
+    <!--<template is="entry" data="{{...post.content}}" />-->
+    <!--<view class="margin-xs padding-sm text-blue" bindtap='showoriginalUrl'>阅读原文</view>-->
+    <!-- 阅读更多 -->
+    <view class="detail-read-more" wx:if="{{hideArticle != ''}}">
+      <view class="detail-readmore-mask">
+        <view class="detail-readmore-btn margin-bottom-xs" bindtap="readMore">观看视频，阅读更多...</view>
+      </view>
+    </view>
+  </view>
+  <view class="detail-body" wx:else>
+    <video class="video_class" object-fit="contain"  bindloadedmetadata="getProportion" src="{{post.content.url}}" autoplay="{{true}}" bindended="onEnded"></video>
+    <view data-url="{{post.content.url}}" class="copyurl" bindtap="copyUrl" >
+        复制链接
+    </view>
+    <view data-url="{{post.title}}" class="copyurl" bindtap="copyUrl" >
+        复制标题
+    </view>
+  </view>
+</view>
+
+
+  <!-- 数据不存在 -->
+  <view wx:if="{{nodata}}">
+    <template is="nodata" data="{{ nodata_str }}" />
+  </view>
+
+
+
+
+

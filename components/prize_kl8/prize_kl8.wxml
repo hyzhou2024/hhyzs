@@ -1,0 +1,296 @@
+<view class="box">
+    <view bindtap="showDetail" class="flex_row issue_container">
+        <view class="issue">{{prize.code}}期</view>
+        <view class="date">{{prize.date}}</view>
+        <view class="week">周{{prize.week}}</view>
+        <image class="{{showDetail?'prize_bottom_arrow':'prize_top_arrow'}}" src="https://resource.cgt-cwl.com.cn/image/2021-08-12-prize_top_arrow.png"></image>
+    </view>
+    <view class="flex_row lottery_balls_kl8">
+        <view class="ballContainer_kl8" wx:for="{{prize.redBallList}}" wx:for-index="idx" wx:for-item="red" wx:key="key">
+            <view class="ball_bg ball_bg_red"></view>
+            <view class="ballDesc"> {{red}}</view>
+        </view>
+    </view>
+    <view wx:if="{{showDetail}}">
+        <view class="flex_row ticket_line">
+            <view class="right_semicircle"></view>
+            <view class="line_dotte"></view>
+            <view class="left_semicircle"></view>
+        </view>
+        <view class="flex_row sales_pool_container" style="padding: 8px 0px 14px 0;">
+            <view class="flex_column pool_container">
+                <view class="pool_money"> {{money.formatNum(prize.sales)}} </view>
+                <view class="pool_desc"> 本期销量(元) </view>
+            </view>
+            <view class="line_v"></view>
+            <view class="flex_column pool_container">
+                <view class="pool_money"> {{money.formatNum(prize.poolmoney)}} </view>
+                <view class="pool_desc"> “选十”玩法奖池金额(元) </view>
+            </view>
+        </view>
+        <image class="structure_line" mode="aspectFill" src="https://resource.cgt-cwl.com.cn/image/2021-08-12-structure_line.png"></image>
+        <view style="position: relative;">
+            <view class="type_container">
+                <view style="width: 50rpx;">　</view>
+                <block wx:for="{{typeContentList}}" wx:for-index="idx" wx:for-item="typeContent" wx:key="key">
+                    <view bindtap="selectGameType" class="{{selectType==typeContent.type?'type_content_selected':'type_content'}}" data-type="{{typeContent.type}}"> {{typeContent.name}} </view>
+                    <view class="line_v_choice" wx:if="{{idx!==typeContentList.length-1}}"></view>
+                </block>
+                <view style="width: 50rpx;">　</view>
+            </view>
+            <view class="type_right_overlay"></view>
+        </view>
+        <view class="prize_grade_container">
+            <view class="flex_row prize_grade">
+                <view class="prize_detail prize_detail_title title_level"> 奖等 </view>
+                <view class="prize_detail prize_detail_title title_num"> 中奖注数 </view>
+                <view class="prize_detail prize_detail_title title_account"> 单注奖金 </view>
+            </view>
+            <view class="line"></view>
+            <block wx:if="{{selectType==10}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选十中十 </view>
+                    <view class="prize_detail title_num"> {{prize.x10z10.typenum?money.formatNum(prize.x10z10.typenum):''}} </view>
+                    <view class="prize_detail title_account"> {{prize.x10z10.typemoney?money.formatNum(prize.x10z10.typemoney):''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选十中九 </view>
+                    <view class="prize_detail title_num"> {{prize.x10z9.typenum?money.formatNum(prize.x10z9.typenum):''}} </view>
+                    <view class="prize_detail title_account"> {{prize.x10z9.typemoney?money.formatNum(prize.x10z9.typemoney):''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选十中八 </view>
+                    <view class="prize_detail title_num"> {{prize.x10z8.typenum?money.formatNum(prize.x10z8.typenum):''}} </view>
+                    <view class="prize_detail title_account"> {{prize.x10z8.typemoney?prize.x10z8.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选十中七 </view>
+                    <view class="prize_detail title_num"> {{prize.x10z7.typenum?money.formatNum(prize.x10z7.typenum):''}} </view>
+                    <view class="prize_detail title_account"> {{prize.x10z7.typemoney?prize.x10z7.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选十中六 </view>
+                    <view class="prize_detail title_num"> {{prize.x10z6.typenum?money.formatNum(prize.x10z6.typenum):''}} </view>
+                    <view class="prize_detail title_account"> {{prize.x10z6.typemoney?prize.x10z6.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选十中五 </view>
+                    <view class="prize_detail title_num"> {{prize.x10z5.typenum?money.formatNum(prize.x10z5.typenum):''}} </view>
+                    <view class="prize_detail title_account"> {{prize.x10z5.typemoney?prize.x10z5.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 全不中 </view>
+                    <view class="prize_detail title_num"> {{prize.x10z0.typenum?money.formatNum(prize.x10z0.typenum):''}} </view>
+                    <view class="prize_detail title_account"> {{prize.x10z0.typemoney?prize.x10z0.typemoney:''}} </view>
+                </view>
+            </block>
+            <block wx:elif="{{selectType==9}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选九中九 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x9z9.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x9z9.typemoney?money.formatNum(prize.x9z9.typemoney):''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选九中八 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x9z8.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x9z8.typemoney?money.formatNum(prize.x9z8.typemoney):''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选九中七 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x9z7.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x9z7.typemoney?prize.x9z7.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选九中六 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x9z6.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x9z6.typemoney?prize.x9z6.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选九中五 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x9z5.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x9z5.typemoney?prize.x9z5.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选九中四 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x9z4.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x9z4.typemoney?prize.x9z4.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 全不中 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x9z0.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x9z0.typemoney?prize.x9z0.typemoney:''}} </view>
+                </view>
+            </block>
+            <block wx:elif="{{selectType==8}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选八中八 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x8z8.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x8z8.typemoney?money.formatNum(prize.x8z8.typemoney):''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选八中七 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x8z7.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x8z7.typemoney?prize.x8z7.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选八中六 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x8z6.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x8z6.typemoney?prize.x8z6.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选八中五 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x8z5.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x8z5.typemoney?prize.x8z5.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选八中四 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x8z4.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x8z4.typemoney?prize.x8z4.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 全不中 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x8z0.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x8z0.typemoney?prize.x8z0.typemoney:''}} </view>
+                </view>
+            </block>
+            <block wx:elif="{{selectType==7}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选七中七 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x7z7.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x7z7.typemoney?prize.x7z7.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选七中六 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x7z6.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x7z6.typemoney?prize.x7z6.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选七中五 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x7z5.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x7z5.typemoney?prize.x7z5.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选七中四 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x7z4.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x7z4.typemoney?prize.x7z4.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 全不中 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x7z0.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x7z0.typemoney?prize.x7z0.typemoney:''}} </view>
+                </view>
+            </block>
+            <block wx:elif="{{selectType==6}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选六中六 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x6z6.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x6z6.typemoney?money.formatNum(prize.x6z6.typemoney):''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选六中五 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x6z5.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x6z5.typemoney?prize.x6z5.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选六中四 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x6z4.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x6z4.typemoney?prize.x6z4.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选六中三 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x6z3.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x6z3.typemoney?prize.x6z3.typemoney:''}} </view>
+                </view>
+            </block>
+            <block wx:elif="{{selectType==5}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选五中五 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x5z5.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x5z5.typemoney?money.formatNum(prize.x5z5.typemoney):''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选五中四 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x5z4.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x5z4.typemoney?prize.x5z4.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选五中三 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x5z3.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x5z3.typemoney?prize.x5z3.typemoney:''}} </view>
+                </view>
+            </block>
+            <block wx:elif="{{selectType==4}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选四中四 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x4z4.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x4z4.typemoney?prize.x4z4.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选四中三 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x4z3.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x4z3.typemoney?prize.x4z3.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选四中二 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x4z2.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x4z2.typemoney?prize.x4z2.typemoney:''}} </view>
+                </view>
+            </block>
+            <block wx:elif="{{selectType==3}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选三中三 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x3z3.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x3z3.typemoney?prize.x3z3.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选三中二 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x3z2.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x3z2.typemoney?prize.x3z2.typemoney:''}} </view>
+                </view>
+            </block>
+            <block wx:elif="{{selectType==2}}">
+                <view class="flex_row prize_grade">
+                    <view class="prize_detail title_level"> 选二中二 </view>
+                    <view class="prize_detail title_num"> {{money.formatNum(prize.x2z2.typenum)}} </view>
+                    <view class="prize_detail title_account"> {{prize.x2z2.typemoney?prize.x2z2.typemoney:''}} </view>
+                </view>
+                <view class="line"></view>
+            </block>
+            <view class="flex_row prize_grade" wx:elif="{{selectType==1}}">
+                <view class="prize_detail title_level"> 选一中一 </view>
+                <view class="prize_detail title_num"> {{money.formatNum(prize.x1z1.typenum)}} </view>
+                <view class="prize_detail title_account"> {{prize.x1z1.typemoney?prize.x1z1.typemoney:''}} </view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="money" src="../../utils/money.wxs" />

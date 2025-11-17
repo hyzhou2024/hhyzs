@@ -1,0 +1,50 @@
+<view  class="container" >
+  <view>
+    红球选择
+  </view>
+  <view class="ssq_container_red">
+  <view wx:for="{{ssq.redBall}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="ssq_num_red       {{item.selected?'ssq_num_red_select':''}}"> 
+  <view >
+    {{item.num}}
+  </view>
+</view>
+</view>
+<view>
+    蓝球选择
+  </view>
+<view class="ssq_container_blue">
+  <view wx:for="{{ssq.blueBall}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="ssq_num_blue {{item.selected?'ssq_num_blue_select':''}}"> 
+  <view >
+    {{item.num}}
+  </view>
+</view>
+</view>
+<view>
+    随机一注
+  </view>
+<view class="ssq_container_blue" wx:if="{{ssq_red.length}}">
+  <view  wx:for="{{ssq_red}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="ssq_num_select ssq_num_red_select"> 
+  <view >
+    {{item.num}}
+  </view>
+
+</view>
+
+<view wx:for="{{ssq_blue}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="ssq_num_select ssq_num_blue_select"> 
+  <view   wx:if="{{ssq_red.length}}">
+    {{item.num}}
+  </view>
+</view>
+</view>
+
+
+<view class="btn">
+    <button bindtap="startInterval" wx:if="{{show}}"  class="button_view">开始</button>
+<button bindtap="endInterval"  wx:else class="button_view">结束</button>
+<button bindtap="getFxDetail" class="button_view_1" >号码历史中奖情况</button> 
+    
+</view>
+
+</view>
+
+

@@ -1,0 +1,37 @@
+<import src="../../templates/nodata.wxml" />
+<view class="sale-info-box" style="font-size: 28rpx;background-color: rgb(221, 218, 218);">
+        <view wx:for="{{head}}" wx:key="id" >
+            <view>{{item}}</view>
+        </view>
+     
+    </view>
+
+<view class="sale-info-box" wx:for="{{pointList}}" wx:key="id" wx:if="{{id =='1'}}">
+        <view style="color:#333;">{{item.code}}</view>
+        
+        <view class="open-number"><text style="background-color: rgb(149, 142, 243); border:1rpx solid rgb(63, 149, 247)">{{item.choose_num}}</text></view>
+        <view wx:if="{{item.open_num !=null}}" class="open-number"><text>{{item.open_num}}</text></view>
+        <view wx:else style="color: rgb(0, 225, 255);">未开奖</view>
+        <view wx:if="{{item.final_gain != null}}" >{{item.final_gain}}</view>
+        <view wx:else style="color: darkorange;">未开奖</view>
+        <view >{{item.up_date}}</view>
+    </view>
+
+    <view class="sale-info-box" wx:for="{{pointList}}" wx:key="id" wx:if="{{id =='2'}}">
+        <view style="color:#333;">{{item.code}}</view>
+        
+        <view class="open-number"  wx:if="{{item.blue !=null}}">
+        <text  style="background-color: rgb(70, 153, 248);">{{item.blue}}</text>
+        </view>
+        <view wx:else style="color: rgb(0, 225, 255);">未开奖</view>
+        <view wx:if="{{item.prizepool !=null}}"><text>{{item.prizepool}}</text></view>
+        <view wx:else style="color: rgb(0, 225, 255);">未开奖</view>
+        <view wx:if="{{item.joinnum != null}}" >{{item.joinnum}}</view>
+        <view wx:else style="color: darkorange;">未开奖</view>
+        <view>{{item.binggonum}}</view>
+    </view>
+<!-- 数据不存在 -->
+<view wx:if="{{nodata}}">
+  <template is="nodata" />
+</view>
+

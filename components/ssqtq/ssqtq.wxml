@@ -1,0 +1,37 @@
+<view class="table_title flex-row bg {{scrollTop>76 ? 'pos' : ''}}"  wx:if="{{config.showLottery}}">
+    <view class="flex-row-cell " style="width: 100%;">第{{ssq.detail.NextIssue}}期同期开奖号码</view>
+</view>
+<view class="flex-row bg " style='border-top:1px solid #222;' wx:if="{{config.showLottery}}">
+    <view class="flex-row-cell " style="width: 10%;">期号</view>
+    <view class="flex-row-cell" style="width: 40%;">红球</view>
+    <view class="flex-row-cell" style="width: 10%;">和值</view>
+    <view class="flex-row-cell" style="width: 10%;">小大</view>
+    <view class="flex-row-cell" style="width: 10%;">奇偶比</view>
+    <view class="flex-row-cell" style="width: 10%;">蓝球</view>
+    <view class="flex-row-cell" style="width: 10%;">奇偶</view>
+
+</view>
+<view class="flex-row" wx:for="{{ssqtq}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" wx:if="{{config.showLottery}}">
+    <view class="flex-row-cell" style="width: 10%;">{{item.code}}</view>
+    <view class="flex-row-cell" style="width: 40%; display:flex">
+        <view wx:for="{{item.red}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="a">
+            <view class="table_red">
+                <view class="redball"> <text>{{item}}</text></view>
+            </view>
+
+        </view>
+    </view>
+    <view class="flex-row-cell" style="width: 10%;">{{item.rsum}}</view>
+    <view class="flex-row-cell" style="width: 10%;">{{item.dx}}</view>
+    <view class="flex-row-cell" style="width: 10%;">{{item.jo}}</view>
+    <view class="flex-row-cell" style="width: 10%;display:flex">
+        <view wx:for="{{item.blue}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="a">
+            <view class="table_red">
+                <view class="blueball"> <text>{{item}}</text></view>
+            </view>
+
+        </view>
+    </view>
+    <view class="flex-row-cell" style="width: 10%;">{{item.bjo}}</view>
+
+</view>

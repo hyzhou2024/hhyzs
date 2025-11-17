@@ -1,0 +1,35 @@
+<!--component/ssq/ssq.wxml-->
+
+
+<view class='container1' wx:if="{{config.showLottery}}">
+  <!-- 开奖号码 -->
+  <view class="open-number-box">
+    <view  wx:if="{{ssq.detail.OpenNumber}}">
+      <text>第<text id='newLastOpenIssueName'>{{ssq.detail.Name}}</text>期开奖号码</text>
+      <view class='open-number'>
+        <block wx:for="{{ssq.detail.OpenNumber.hq}}" wx:for-item="Num" wx:key="hq">
+          <text>{{Num}}</text>
+        </block>
+        <block wx:for="{{ssq.detail.OpenNumber.lq}}" wx:for-item="Num" wx:key="lq">
+          <text class='blue-ball'>{{Num}}</text>
+        </block>
+     
+      </view>
+    </view>
+    <view wx:else>
+      <text>第<text id='newLastOpenIssueName'>{{ssq.detail.Name}}</text>期正在开奖</text>
+      <view class='open-number'>
+        <text>?</text>
+        <text>?</text>
+        <text>?</text>
+        <text>?</text>
+        <text>?</text>
+        <text>?</text>
+        <text class='blue-ball'>?</text>
+      </view>
+    </view>
+  
+  </view>
+
+</view>
+

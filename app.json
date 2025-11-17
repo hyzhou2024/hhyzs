@@ -1,0 +1,65 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/topic/topic",
+    "pages/topic/topiclist/topiclist",
+    "pages/detail/detail",
+    "pages/find/find",
+    "pages/mine/mine",
+    "pages/opendetail/opendetail",
+    "pages/more/more",
+    "pages/admin/admin",
+    "pages/admin/upload/upload",
+    "pages/find/detail/detail",
+    "pages/hb/tx",
+    "pages/hb/hb",
+    "pages/record/record"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#011d44"
+  },
+  "tabBar": {
+    "color": "#959394",
+    "selectedColor": "#1296db",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/images/tab/index.png",
+        "selectedIconPath": "/images/tab/index_clicked.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/topic/topic",
+        "iconPath": "/images/tab/function.png",
+        "selectedIconPath": "/images/tab/function_clicked.png",
+        "text": "专题"
+      },
+      {
+        "pagePath": "pages/find/find",
+        "iconPath": "/images/tab/find.png",
+        "selectedIconPath": "/images/tab/find_clicked.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "iconPath": "/images/tab/topic.png",
+        "selectedIconPath": "/images/tab/topic_clicked.png",
+        "text": "更多"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "/images/tab/mine.png",
+        "selectedIconPath": "/images/tab/mine_clicked.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

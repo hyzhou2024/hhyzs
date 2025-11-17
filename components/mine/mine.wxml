@@ -1,0 +1,29 @@
+<view class="bg-white">
+  <view class="flex padding align-center">
+    <view class="avatar round margin-xs radius">
+    <view class="userinfo">
+    </view>
+      <button class="avatar-wrapper" open-type="chooseAvatar"  bind:chooseavatar="getUserInfo">
+        <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+      </button>
+    </view>
+    <view class="padding-sm margin-xs radius">
+      <input type="nickname"placeholder="{{userInfo.nickName}}" bind:change="onInputChange" ></input>
+    
+    </view>
+  </view>
+  
+  
+</view>
+<view class="cu-list menu margin-top-sm shadow-lg">
+ 
+  <view class="cu-item arrow">
+    <button class='cu-btn content' open-type='feedback'>
+      <text class='cuIcon-writefill text-cyan'></text>
+      <text class='text-grey'>意见反馈</text>
+    </button>
+  </view>
+
+ 
+ 
+</view>

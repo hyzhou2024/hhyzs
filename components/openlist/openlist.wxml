@@ -1,0 +1,39 @@
+<view class="openpage" wx:if="{{config.showLottery}}">
+  <view wx:for="{{openlist}}" wx:key="index">
+    <navigator class="open_openbox" url="../opendetail/opendetail?name={{item.id}}">
+      <view class="open_container">
+        <view style="display: flex;align-items:center">
+          <view class="ele1">
+            <image src="{{item.imageUrl}}"></image>
+            <view>{{item.type}}</view>
+          </view>
+          <view class="ele0">第{{item.Name}}期</view>
+        </view>
+        <view class="ele2">
+          <view> {{item.openDate}} </view>
+        </view>
+      </view>
+      <view class="number" hoverClass="none">
+        <view class="open-number-fc" wx:if="{{item.OpenNumber}}">
+          <text wx:for="{{item.OpenNumber.hq}}" wx:for-item="Num" wx:key="hq">{{Num}}</text>
+          <text class="blue-ball" wx:for="{{item.OpenNumber.lq}}" wx:for-item="Num" wx:key="lq">{{Num}}</text>
+        </view>
+        <view class="open-number" wx:else>
+          <text>?</text>
+          <text>?</text>
+          <text>?</text>
+          <text>?</text>
+          <text>?</text>
+          <text>?</text>
+          <text class="blue-ball">?</text>
+        </view>
+        <view class="blue">
+
+          往期开奖
+          <image src='../../images/youjiantou.png'></image>
+        </view>
+      </view>
+
+    </navigator>
+  </view>
+</view>

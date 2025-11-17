@@ -1,0 +1,53 @@
+/* pages/record/record.wxss */
+.sale-info-box-head {
+    align-items: center;
+    background-color: #fff;
+    color: #666;
+    display: flex;
+    height: 100rpx;
+    text-align: center;
+    width: 100%;
+    font-size: 16rpx;
+}
+
+.sale-info-box {
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1rpx solid #f2f2f2;
+    color: #666;
+    display: flex;
+    height: 100rpx;
+   
+    text-align: center;
+    width: 100%;
+    font-size: 16rpx;
+}
+
+.sale-info-box view {
+    border-right: 1rpx solid #f2f2f2;
+    flex: 1;
+    line-height: 100rpx;
+}
+.sale-info-box-head view {
+    flex: 1;
+    line-height: 100rpx;
+}
+
+.sale-info-box view:last-child {
+    border-right: 0;
+}
+
+.sale-info-box:last-child {
+    border-bottom: 0;
+}
+.open-number text {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 24rpx;
+    background-color: #2bcafa;
+    color: azure;
+    border-radius: 50%;
+    margin-right: 8rpx;
+  }

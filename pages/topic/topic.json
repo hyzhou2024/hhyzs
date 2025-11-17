@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+     
+      "topic": "../../components/topic/topic",
+      "openlist": "../../components/openlist/openlist"
+  
+    }
+}

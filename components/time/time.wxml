@@ -1,0 +1,8 @@
+<view wx:if="{{ isCountOver }}" class="timer-wrap">
+	<slot name="desc" />
+	<view class="reset-time">
+		<text wx:if="{{ d != '00' }}"> {{ d }}天</text>
+		{{ h }}时{{ m }}分{{ s }}秒</view
+	>
+</view>
+<view wx:else class="reset-time"> {{ emptyType === '1' ? '已超时': '' }} </view>

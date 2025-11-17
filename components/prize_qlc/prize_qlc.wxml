@@ -1,0 +1,84 @@
+<view class="box">
+    <view bindtap="showDetail" class="flex_row issue_container">
+        <view class="issue">{{prize.code}}期</view>
+        <view class="date"> {{prize.date}}</view>
+        <view class="week">周{{prize.week}}</view>
+        <image class="{{showDetail?'prize_bottom_arrow':'prize_top_arrow'}}" src="https://resource.cgt-cwl.com.cn/image/2021-08-12-prize_top_arrow.png"></image>
+    </view>
+    <view class="flex_row lottery_balls">
+        <view class="ballContainer red_ball" wx:for="{{prize.redBallList}}" wx:for-item="red" wx:key="key">
+            <view class="ballDesc"> {{red}}</view>
+        </view>
+        <view class="ballContainer blue_ball">
+            <view class="ballDesc"> {{prize.blue}}</view>
+        </view>
+    </view>
+    <view wx:if="{{showDetail}}">
+        <view class="flex_row ticket_line">
+            <view class="right_semicircle"></view>
+            <view class="line_dotte"></view>
+            <view class="left_semicircle"></view>
+        </view>
+        <view class="flex_row sales_pool_container">
+            <view class="flex_column pool_container">
+                <view class="pool_money"> {{money.formatNum(prize.sales)}} </view>
+                <view class="pool_desc"> 本期销量(元) </view>
+            </view>
+            <view class="line_v"></view>
+            <view class="flex_column pool_container">
+                <view class="pool_money"> {{money.formatNum(prize.poolmoney)}} </view>
+                <view class="pool_desc"> 奖池滚动(元) </view>
+            </view>
+        </view>
+        <view class="prize_grade_container">
+            <view class="flex_row prize_grade">
+                <view class="prize_detail prize_detail_title title_level"> 奖等 </view>
+                <view class="prize_detail prize_detail_title title_num"> 中奖注数 </view>
+                <view class="prize_detail prize_detail_title title_account"> 单注奖金 </view>
+            </view>
+            <view class="line"></view>
+            <view class="flex_row prize_grade">
+                <view class="prize_detai title_level"> 一等奖 </view>
+                <view class="prize_detail title_num"> {{prize.prizegrades[0].typenum}} </view>
+                <view class="prize_detail title_account"> {{money.formatNum(prize.prizegrades[0].typemoney)}} </view>
+            </view>
+            <view class="line"></view>
+            <view class="flex_row prize_grade">
+                <view class="prize_detai title_level"> 二等奖 </view>
+                <view class="prize_detail title_num"> {{money.formatNum(prize.prizegrades[1].typenum)}} </view>
+                <view class="prize_detail title_account"> {{money.formatNum(prize.prizegrades[1].typemoney)}} </view>
+            </view>
+            <view class="line"></view>
+            <view class="flex_row prize_grade">
+                <view class="prize_detai title_level"> 三等奖 </view>
+                <view class="prize_detail title_num"> {{money.formatNum(prize.prizegrades[2].typenum)}} </view>
+                <view class="prize_detail title_account"> {{money.formatNum(prize.prizegrades[2].typemoney)}} </view>
+            </view>
+            <view class="line"></view>
+            <view class="flex_row prize_grade">
+                <view class="prize_detai title_level"> 四等奖 </view>
+                <view class="prize_detail title_num"> {{money.formatNum(prize.prizegrades[3].typenum)}} </view>
+                <view class="prize_detail title_account"> {{prize.prizegrades[3].typemoney}} </view>
+            </view>
+            <view class="line"></view>
+            <view class="flex_row prize_grade">
+                <view class="prize_detai title_level"> 五等奖 </view>
+                <view class="prize_detail title_num"> {{money.formatNum(prize.prizegrades[4].typenum)}} </view>
+                <view class="prize_detail title_account"> {{prize.prizegrades[4].typemoney}} </view>
+            </view>
+            <view class="line"></view>
+            <view class="flex_row prize_grade">
+                <view class="prize_detai title_level"> 六等奖 </view>
+                <view class="prize_detail title_num"> {{money.formatNum(prize.prizegrades[5].typenum)}} </view>
+                <view class="prize_detail title_account"> {{prize.prizegrades[5].typemoney}} </view>
+            </view>
+            <view class="line"></view>
+            <view class="flex_row prize_grade">
+                <view class="prize_detai title_level"> 七等奖 </view>
+                <view class="prize_detail title_num"> {{money.formatNum(prize.prizegrades[6].typenum)}} </view>
+                <view class="prize_detail title_account"> {{prize.prizegrades[6].typemoney}} </view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="money" src="../../utils/money.wxs" />

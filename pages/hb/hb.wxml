@@ -1,0 +1,22 @@
+<import src="../../templates/nodata.wxml" />
+<ad wx:if="{{config.showLottery}}" unit-id="adunit-e173d4215e67314d"></ad>
+<view class="bg-white">
+  <view class="flex solid-bottom align-center justify-between" wx:for="{{pointList}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" data-idx="{{idx}}">
+    <view class="padding-sm margin-xs radius">
+      <view>{{item.changeDesc}}</view>
+      
+      <view class="padding-top-sm">{{item.up_time}}</view>
+    </view>
+    <view class="padding-sm margin-xs radius {{item.changeJifen>0?'text-red':'text-green'}}">
+      <view style="color:rgba(254,214,155,1) ;">剩余：{{item.totalJifen}}红包券</view>
+      <view>{{item.changeJifen>0?'+'+item.changeJifen:item.changeJifen}}红包券</view>
+      
+    </view>
+
+  </view>
+</view>
+<!-- 数据不存在 -->
+<view wx:if="{{nodata}}">
+  <template is="nodata" />
+</view>
+

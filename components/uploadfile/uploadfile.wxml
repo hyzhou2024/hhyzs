@@ -1,0 +1,20 @@
+<!--pages/edit/edit.wxml-->
+<view style="background-color:white;">
+  <view class='edit-header'>
+    <text bindtap='saveEditOrNot'>取消</text>
+    <text class='header-delive' bindtap='post'>发表</text>
+</view>
+<view class='edit-main'>
+    <textarea class='edit-text' placeholder='这一刻的想法...' placeholder-style='color:#888' bindinput="getInputValue" value="{{content}}"></textarea>
+    <view class='edit-img'>
+        <view wx:for="{{tempFiles}}"  wx:key="index" bindtap="ViewImage" data-url="{{item.tempFilePath}}">
+            <image src='{{item.tempFilePath}}' mode='aspectFill' bind:longpress="DelImg" wx:if="{{item.fileType =='image'}}"/>
+            <image src='{{item.thumbTempFilePath}}' mode='aspectFill' bind:longpress="DelImg" wx:if="{{item.fileType =='video'}}"/>
+        </view>
+        <view class=' icon-plus' catchtap='chooseImage'>
+          <image src='https://minidataservice.com/images/mini/510.png' mode='aspectFill' bind:longpress="DelImg" />
+        </view>
+    </view>
+</view>
+
+</view>

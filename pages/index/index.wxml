@@ -1,0 +1,18 @@
+<view class="swiper_tab" wx:if="{{config.showLottery}}">
+    <scroll-view scrollX="true" class="prize_type_container ">
+        <view class="swiper_tab_list flex_column " wx:for="{{result}}" wx:for-index="idx" wx:key="idx">
+            <view bindtap="swichNav" class="{{currentTab==item.id?'on':'of'}}" data-id="{{item.id}}" >{{item.tab_name}}</view>
+        </view>
+    </scroll-view>
+</view>
+
+<view wx:for="{{result}}" wx:for-index="idx" wx:key="idx" >
+    <view hidden="{{currentTab!=idx}}">
+        <ssqrec wx:if="{{item.tab_name == '推荐'&& item.rec == '双色球'}}" ssq="{{item}}" config="{{config}}" class="rec"></ssqrec> 
+        <ssqv1 wx:if="{{item.tab_name == '双色球'}}" ssq="{{item}}" config="{{config}}"></ssqv1> 
+        <dlt wx:if="{{item.tab_name == '大乐透'}}" ssq="{{item}}" config="{{config}}"></dlt>
+        <fc3d wx:if="{{item.tab_name == '福彩3D'}}" ssq="{{item}}" config="{{config}}"></fc3d>
+    </view>
+</view>
+
+<article class="art"  wx:if="{{config.showCheck}}"></article>

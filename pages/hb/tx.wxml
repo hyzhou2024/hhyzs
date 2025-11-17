@@ -1,0 +1,40 @@
+<import src="../../templates/nodata.wxml" />
+<view class="money_container" wx:if="{{config.showLottery}}">
+    <view class="flex padding align-center">
+    <view class="avatar round margin-xs radius">
+        <image src="{{userProfile.avatar_url}}"  mode="widthFix" data-id="{{item}}" ></image>
+    </view>
+    <view class="padding-sm margin-xs radius">
+      <view type="userNickName">{{userProfile.nickname}}</view>
+    </view>
+  </view>
+    <view class="h1">
+        <view>红包券</view>
+    </view>
+  <view class="h2">
+    <view>{{userProfile.jifen}}</view>
+  </view>
+  <view class="h3">
+    <view style="font-size: 26rpx;">足够的红包券即可提现，1分钟内到账</view>
+    <navigator url="/pages/hb/hb">红包券明细</navigator>
+  </view>
+</view>
+<radio-group class="box" bindchange="checkChange" wx:if="{{config.showLottery}}">
+  <label  class="vitem" wx:for="{{allGoodsFilte}}" wx:key="index" >
+    <radio value="{{item.value}}" name="{{item.name}}" checked="{{item.checked}}" hidden="true"></radio>
+    <label class="val {{item.checked?'is_checked':''}}"> 
+    <view>{{item.name}}</view>
+    <view style="font-size: 26rpx;">消耗{{item.value}}红包券</view>
+    </label>
+  </label>
+</radio-group>
+<view class="tx_btn" bindtap="txLuck" wx:if="{{config.showLottery}}"><view class="text">确认提现</view></view>
+<view class="cu-list menu card-menu margin-top" wx:if="{{showBanner&&config.showLottery}}">
+    <ad binderror="adError" bindclose="adClose" unit-id="{{showBannerId}}"></ad>
+  </view>
+  <ad wx:if="{{config.showLottery}}" unit-id="adunit-e173d4215e67314d"></ad>
+<!-- 数据不存在 -->
+<view wx:if="{{nodata}}">
+  <template is="nodata" />
+</view>
+

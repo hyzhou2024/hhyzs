@@ -1,0 +1,22 @@
+/* components/article1/article1.wxss */
+.pic_list{
+  font-size: 18rpx;
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  margin: 10rpx auto;
+  justify-content: space-around;
+}
+.pic_ritem{
+  background-color: #ffffff;
+  /* border: 1rpx solid rgb(189, 184, 184); */
+  box-sizing: border-box;
+  width: 48%;
+  text-align: center;
+}
+.pic_ritem image{
+  width: 100%;
+  border-radius: 0;
+}

@@ -1,0 +1,9 @@
+{
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+     
+      "article1": "../../components/article1/article1"  
+  
+    }
+}

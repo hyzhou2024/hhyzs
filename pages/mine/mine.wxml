@@ -1,0 +1,98 @@
+<view class="bg-white" wx:if="{{config.showLottery}}">
+  <view class="flex padding align-center">
+    <view class="avatar round margin-xs radius">
+    <view class="userinfo">
+    </view>
+      <button class="avatar-wrapper" open-type="chooseAvatar"  bind:chooseavatar="getUserInfo">
+        <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+      </button>
+    </view>
+    <view class="padding-sm margin-xs radius">
+      <input type="nickname"placeholder="{{userInfo.nickName}}" bind:change="onInputChange" ></input>
+      <view class="margin-top-xs text-xs">
+        <view class="cu-tag line-orange radius sm" bindtap="clickVip">{{vipDesc}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-list-special">
+    <view class="bg-gradual-orange signbanner shadow-blur">
+      <view class="flex solid-bottom justify-between align-center">
+        <view class="padding-sm radius">
+          已连续签到:
+          <text class="text-sl">{{signedDays}}</text>
+          天
+        </view>
+        <view class="padding-sm radius">
+          <view class="cu-btn round bg-white" bindtap="btnSigned">{{signBtnTxt}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-list grid col-4 no-border">
+    <view class="cu-item" wx:for="{{iconList}}" wx:key ="idx" bindtap="{{item.bindtap}}">
+      <view class="cuIcon-{{item.icon}} text-{{item.color}}">
+        <view class="cu-tag badge" wx:if="{{item.badge!=0}}">
+          <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+        </view>
+      </view>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+</view>
+<view class="cu-list menu margin-top-sm shadow-lg" wx:if="{{config.showLottery}}">
+  <view class="cu-item arrow">
+    <view class='content' bindtap="showQrcode">
+      <text class='cuIcon-refund text-red'></text>
+      <text class='text-grey'>打赏支持</text>
+    </view>
+  </view>
+  <view class="cu-item arrow">
+    <button class='cu-btn content' open-type='feedback'>
+      <text class='cuIcon-writefill text-cyan'></text>
+      <text class='text-grey'>意见反馈</text>
+    </button>
+  </view>
+  <view class="cu-item arrow">
+    <view class='content' bindtap='showWechatCode' hover-class='none'>
+      <text class='cuIcon-creativefill text-orange'></text>
+      <text class='text-grey'>联系作者</text>
+    </view>
+  </view>
+  <view class="cu-item arrow">
+    <view class='content' bindtap='showRelease' hover-class='none'>
+      <text class='cuIcon-formfill text-blue'></text>
+      <text class='text-grey'>历史版本</text>
+    </view>
+  </view>
+  <navigator wx:if="{{isAuthor}}" class="cu-item arrow  margin-top-sm" url="../admin/admin">
+    <view class='content'>
+      <text class='cuIcon-settings text-gary'></text>
+      <text class='text-grey'>后台管理</text>
+    </view>
+  </navigator>
+</view>
+
+<view class="cu-modal {{showVIPModal?'show':''}} " wx:if="{{!config.showLottery}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">成为VIP说明</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl bg-white">
+      <view>申请条件：打赏过作者的用户即可申请</view>
+      <view>VIP权益：拥有VIP专属标签</view>
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub " bindtap="hideModal">取消</view>
+      <view class="action margin-0 flex-sub text-green solid-left" bindtap="showMoneryUrl">
+        打赏
+      </view>
+      <view class="action margin-0 flex-sub text-green solid-left" bindtap="applyVip">
+        申请
+      </view>
+    </view>
+  </view>
+</view>
+<mine wx:if="{{config.showCheck}}"></mine>

@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "styleIsolation": "apply-shared",
+  "usingComponents": {
+    "nav": "../../components/nav/nav",
+    "countdown": "../../components/countdown/countdown",
+    "ssqtq": "../../components/ssqtq/ssqtq",
+    "pc": "../../components/prize_count/prize_count"
+  }
+}

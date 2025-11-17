@@ -1,0 +1,2 @@
+<topic wx:if="{{config.showCheck}}"></topic>
+<openlist config ='{{config}}' wx:if="{{config.showLottery}}"></openlist>

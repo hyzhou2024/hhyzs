@@ -1,0 +1,15 @@
+{
+    "navigationBarTitleText": "",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "ssq": "../../components/prize_ssq/prize_ssq",
+        "kl8": "../../components/prize_kl8/prize_kl8",
+        "fc3d": "../../components/prize_3d/prize_3d",
+        "qlc": "../../components/prize_qlc/prize_qlc",
+        "dlt": "../../components/prize_dlt/prize_dlt",
+        "qxc": "../../components/prize_qxc/prize_qxc",
+        "pl5": "../../components/prize_pl5/prize_pl5",
+        "pl3": "../../components/prize_pl3/prize_pl3"
+  
+    }
+}

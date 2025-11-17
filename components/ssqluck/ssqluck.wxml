@@ -1,0 +1,131 @@
+<import src="../../../templates/nodata.wxml"></import>
+<view class="money_container" wx:if="{{config.showLottery}}">
+  <view class="liconbox">
+    <view class="lritem" wx:for="{{lucknav}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" wx:if="{{item.type != 'contact'}}">
+      <navigator wx:if="{{item.type == 'miniprogram'}}" class="iconbox_one" target="miniProgram" open-type="navigate" app-id="{{item.appid}}" path="{{item.path}}" version="release">
+        <image src="{{item.iconurl}}" mode="widthFix" data-id="{{item}}"></image>
+        <view data-id="{{item.name}}">{{item.name}}</view>
+      </navigator>
+      <navigator url="{{item.path}}" wx:if="{{item.type == 'navigation'}}">
+        <image src="{{item.iconurl}}" mode="widthFix" data-id="{{item}}"></image>
+        <view data-id="{{item.name}}">{{item.name}}</view>
+      </navigator>
+    </view>
+  </view>
+  <view class="msg_container1">
+    <image src="https://minidataservice.com/images/fc/tz.png" mode="widthFix"></image>
+    <swiper class="swiper_container " vertical="true" autoplay="true" circular="true" interval="3000">
+      <block>
+        <view url="{{item.url}}" wx:for="{{msg_list}}" wx:for-item="item" wx:key="id">
+          <swiper-item bindtap="bindJoin">
+            <view class="list_des">
+              <view class="list_title">
+                <view>恭喜</view>
+                <image src="{{item.avatar_url}}" mode="widthFix"></image>
+                <view style="color: #1700e6;">{{item.nickname}}</view>
+                <view>参与幸运抽奖获得</view>
+                <view style="color: #0064e6;">{{item.final_gain}}</view>
+                <view>红包券</view>
+              </view>
+            </view>
+          </swiper-item>
+
+        </view>
+      </block>
+    </swiper>
+    <!-- <view class="join_a" bindtap="bindJoin">立即参与</view> -->
+
+  </view>
+  <view class="hongbao" wx:if="{{config.showLottery}}">
+    <view class="top">截止时间{{luck.deadline}}</view>
+    <view bindtap="showSelectModal" class="{{show?'btn-open':'btn-open2'}}">
+      <text>福</text>
+    </view>
+    <view class="max_luck">第{{luck.code}}期奖池</view>
+    <view>
+      <numscroll value="{{num}}" class="max_luck_jc" style="display: flex;justify-content: center;"></numscroll>
+    </view>
+    <view class="hongbo_bottom">
+
+      <view class="avatar-list">
+        <view wx:for="{{luckusers}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" data-idx="{{idx}}" style='transform:translateX({{-idx*25}}rpx)'>
+          <view>
+            <view class="avatar-wrapper">
+              <image class="avatar" src="{{item.avatar_url}}"></image>
+            </view>
+          </view>
+
+        </view>
+
+
+        <!-- 更多头像 -->
+      </view>
+      <view>共{{luck.joinnum}}人参与,参与人数越多，奖池越大</view>
+    </view>
+
+  </view>
+
+  <view>收徒可永久徒弟中奖金额的10%系统额外奖励>>立即分享</view>
+  <view wx:if="{{nodata}}">
+    <template is="nodata" data></template>
+  </view>
+
+  <view class="cu-modal {{showVIPModal?'show':''}}">
+    <view class="cu-dialog" style="width:100%">
+      <view class="cu-bar bg-gradual-green justify-end">
+        <view class="content">双色球蓝球选号</view>
+        <view bindtap="hideModal" class="action">
+          <text class="cuIcon-close text-white"></text>
+        </view>
+      </view>
+      <view class="padding-xl bg-white">
+
+        <view class="select_container" wx:for="{{fcopenlist}}" wx:key="index" wx:if="{{index ==0}}">
+          <view class="open_openbox" wx:if="{{config.showLottery&&item.type=='双色球'}}">
+            <view class="open_container" wx:if="{{config.showLottery&&item.type=='双色球'}}">
+              <view style="display: flex;align-items:center">
+                <view class="ele1">
+                  <image src="{{item.imageUrl}}"></image>
+                  <view>{{item.type}}</view>
+                </view>
+                <view class="ele0">第{{item.Name}}期</view>
+              </view>
+              <view class="ele2">
+                <view> {{item.openDate}} </view>
+              </view>
+            </view>
+            <navigator class="number" hoverClass="none" url="../openlist/openlist?lotId=39&lotName=大乐透">
+              <view class="open-number-fc" wx:if="{{item.OpenNumber}}">
+                <text wx:for="{{item.OpenNumber.hq}}" wx:for-item="Num" wx:key="hq">{{Num}}</text>
+                <text class="blue-ball" wx:for="{{item.OpenNumber.lq}}" wx:for-item="Num" wx:key="lq">{{Num}}</text>
+              </view>
+              <view class="open-number" wx:else>
+                <text>?</text>
+                <text>?</text>
+                <text>?</text>
+                <text>?</text>
+                <text>?</text>
+                <text>?</text>
+                <text class="blue-ball">?</text>
+              </view>
+            </navigator>
+          </view>
+        </view>
+
+        <view class="select_text">参与{{luck.code}}期双色球蓝球竞猜，中奖者瓜分奖池红包券</view>
+        <radio-group class='box' id="2" bindchange="checkChange">
+          <label class="bitem" wx:for="{{bitems}}" wx:key="idx">
+            <radio value="{{item.bvalue}}" name="{{item.bvalue}}" checked="{{item.blue_checked}}" hidden='true' />
+            <label class="blueval {{item.blue_checked?'is_checked':''}}">{{item.bvalue}}</label>
+          </label>
+        </radio-group>
+      </view>
+
+      <view class="cu-bar bg-white">
+        <view bindtap="clearAll" class="action margin-0 flex-sub ">清空</view>
+        <view bindtap="attempJoin" class="action margin-0 flex-sub text-blue solid-left" data-code="{{luck.code}}"> 观看视频免费参与 </view>
+      </view>
+      <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose" wx:if="{{showVIPModal}}"></ad>
+    </view>
+  </view>
+</view>

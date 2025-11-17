@@ -1,0 +1,185 @@
+<!--component/ssq/ssq.wxml-->
+
+
+<view class='container1' wx:if="{{config.showLottery}}">
+  <!-- 开奖号码 -->
+  <view class="open-number-box">
+    <view wx:if="{{ssq.detail.OpenNumber}}">
+      <text>第<text id='newLastOpenIssueName'>{{ssq.detail.Name}}</text>期开奖号码</text>
+      <view class='open-number'>
+        <block wx:for="{{ssq.detail.OpenNumber.hq}}" wx:for-item="Num" wx:key="hq">
+          <text>{{Num}}</text>
+        </block>
+        <block wx:for="{{ssq.detail.OpenNumber.lq}}" wx:for-item="Num" wx:key="lq">
+          <text class='blue-ball'>{{Num}}</text>
+        </block>
+        <navigator url='../opendetail/opendetail?name=ssqlist' class='moveinfo'>
+          <image src='../../images/youjiantou.png'></image>
+        </navigator>
+      </view>
+    </view>
+    <view wx:else>
+      <text>第<text id='newLastOpenIssueName'>{{ssq.detail.Name}}</text>期正在开奖</text>
+      <view class='open-number'>
+        <text>?</text>
+        <text>?</text>
+        <text>?</text>
+        <text>?</text>
+        <text>?</text>
+        <text>?</text>
+        <text class='blue-ball'>?</text>
+      </view>
+    </view>
+    <view class="open-bottom" style="color:#fff;margin-top: 30rpx;margin-bottom: 5rpx;">
+      <view class="timebox1">
+        <view class="top-itempro blue">
+          <navigator url="/pages/tool/moneyamount">
+            <text>奖金计算器</text>
+          </navigator>
+        </view>
+        <view class="top-itempro red">
+          <navigator url="{{ssq.detail.live2}}">开奖回放</navigator>
+        </view>
+      </view>
+
+
+
+
+      <view class="timebox">
+        <view class="open-time">距{{ssq.detail.Name}}期开奖：</view>
+        <countdown class="time" lasttime='{{ssq.detail.NextDate.n_date_time}}'></countdown>
+      </view>
+
+
+    </view>
+  </view>
+  <view class="sale-info-title">
+    <view>本期销量：{{ssq.detail.ySales}}亿元</view>
+    <view>奖池滚动：{{ssq.detail.yPrizepool}}亿元</view>
+  </view>
+
+
+</view>
+
+
+
+
+<view class="bonus-table">
+  <view class="bonus-item item1">
+    <view class="bigsize">奖级</view>
+    <view>一等奖</view>
+    <view>二等奖</view>
+    <view>三等奖</view>
+    <view>四等奖</view>
+    <view>五等奖</view>
+    <view>六等奖</view>
+  </view>
+  <view class="bonus-item item2">
+    <view class="bigsize">中奖条件</view>
+    <view class="box1">
+      <view class="ball-box">
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball blue-ball"></text>
+      </view>
+    </view>
+    <view class="box1">
+      <view class="ball-box">
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball"></text>
+        <text class="ball"></text>
+      </view>
+    </view>
+    <view class="box1">
+      <view>
+        <view class="ball-box">
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball blue-ball"></text>
+        </view>
+      </view>
+
+    </view>
+    <view class="box1">
+      <view>
+        <view class="ball-box">
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+        </view>
+        <view class="ball-box">
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball blue-ball"></text>
+        </view>
+      </view>
+
+    </view>
+    <view class="box1">
+      <view>
+        <view class="ball-box">
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+        </view>
+        <view class="ball-box">
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball blue-ball"></text>
+        </view>
+      </view>
+
+    </view>
+    <view class="box1">
+      <view>
+        <view class="ball-box">
+          <text class="ball"></text>
+          <text class="ball"></text>
+          <text class="ball blue-ball"></text>
+        </view>
+        <view class="ball-box">
+          <text class="ball"></text>
+          <text class="ball blue-ball"></text>
+        </view>
+        <view class="ball-box">
+          <text class="ball blue-ball"></text>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <view class="bonus-item item3">
+    <view class="bigsize">注数</view>
+    <view>{{ssq.detail.PrizeGrades[0].typenum}}</view>
+    <view>{{ssq.detail.PrizeGrades[1].typenum}}</view>
+    <view>{{ssq.detail.PrizeGrades[2].typenum}}</view>
+    <view>{{ssq.detail.PrizeGrades[3].typenum}}</view>
+    <view>{{ssq.detail.PrizeGrades[4].typenum}}</view>
+    <view>{{ssq.detail.PrizeGrades[5].typenum}}</view>
+  </view>
+  <view class="bonus-item item3">
+    <view class="bigsize">奖金</view>
+    <view>{{ssq.detail.PrizeGrades[0].typemoney}}</view>
+    <view>{{ssq.detail.PrizeGrades[1].typemoney}}</view>
+    <view>{{ssq.detail.PrizeGrades[2].typemoney}}</view>
+    <view>{{ssq.detail.PrizeGrades[3].typemoney}}</view>
+    <view>{{ssq.detail.PrizeGrades[4].typemoney}}</view>
+    <view>{{ssq.detail.PrizeGrades[5].typemoney}}</view>
+  </view>
+</view>

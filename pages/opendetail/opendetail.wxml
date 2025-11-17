@@ -1,0 +1,26 @@
+<view class="page" wx:if="{{config.showLottery}}">
+  <view class="tabbar">
+    <scroll-view scrollX="true" class=" prize_type_container" scroll-into-view="{{name}}">
+      <view bindtap="selectPrize" class="flex_column prize_type" data-name="{{prizeType.name}}" wx:for="{{prizeTypeList}}" wx:for-item="prizeType" wx:key="key" id="{{prizeType.name}}">
+        <view class="{{prizeType.name===name?'title_selected':'title_unselected'}}">{{prizeType.desc}}</view>
+        <image mode="aspectFit" src="https://resource.cgt-cwl.com.cn/image/2021-08-10-arrow_entity_up.png" style="width: 20rpx; height: 20rpx;" wx:if="{{prizeType.name===name}}"></image>
+      </view>
+    </scroll-view>
+  </view>
+  <view style="height: 120rpx;"></view>
+  <view class="lottery_source_desc"> 小程序数据来源 http://www.cwl.gov.cn </view>
+  <block wx:if="{{name==prizeType.name}}" wx:for="{{prizeTypeList}}" wx:for-item="prizeType" wx:key="key">
+    <block wx:for="{{prizeType.prizeList}}" wx:for-index="prizeIndex" wx:for-item="prize" wx:key="key">
+      <dlt prize="{{prize}}" showDetail="{{prizeIndex == 0}}" wx:if="{{name == 'dltlist'}}"></dlt>
+      <ssq prize="{{prize}}" showDetail="{{prizeIndex == 0}}" wx:if="{{name == 'ssqlist'}}"></ssq>
+      <kl8 prize="{{prize}}" showDetail="{{prizeIndex == 0}}" wx:if="{{name == 'kl8list'}}"></kl8>
+      <fc3d prize="{{prize}}" showDetail="{{prizeIndex == 0}}" wx:if="{{name == '3dlist'}}"></fc3d>
+      <qlc prize="{{prize}}" showDetail="{{prizeIndex == 0}}" wx:if="{{name == 'qlclist'}}"></qlc>
+      <qxc prize="{{prize}}" showDetail="{{prizeIndex == 0}}" wx:if="{{name == 'qxclist'}}"></qxc>
+      <pl5 prize="{{prize}}" showDetail="{{prizeIndex == 0}}" wx:if="{{name == 'pl5list'}}"></pl5>
+      <pl3 prize="{{prize}}" showDetail="{{prizeIndex == 0}}" wx:if="{{name == 'pl3list'}}"></pl3>
+
+    </block>
+  </block>
+</view>
+<view wx:if="{{config.showCheck}}">暂无数据</view>

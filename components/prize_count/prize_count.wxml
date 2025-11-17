@@ -1,0 +1,105 @@
+<!--pages/selnumber/selnumber.wxml-->
+<view wx:if="{{config.showLottery}}">
+  <view class="exp">请选择<text>至少6个</text>红球+<text>至少1个</text>蓝球</view>
+
+  <checkbox-group class='box' id="1" bindchange="checkChange">
+    <label class="ritem" wx:for="{{ritems}}" wx:key="ritems">
+      <checkbox value="{{item.rvalue}}" name="{{item.rvalue}}" checked="{{item.red_checked}}" hidden='true'></checkbox>
+      <label class="redval {{item.red_checked?'is_checked':''}}">{{item.rvalue}}</label>
+    </label>
+  </checkbox-group>
+
+  <checkbox-group bindchange="checkChange" class="box" id="2">
+        <label class="bitem" wx:for="{{bitems}}" wx:key="index">
+            <checkbox checked="{{item.blue_checked}}" hidden="true" name="{{item.bvalue}}" value="{{item.bvalue}}"></checkbox>
+            <label class="blueval {{item.blue_checked?'is_checked':''}}">{{item.bvalue}}</label>
+        </label>
+    </checkbox-group>
+  <view class='btn'>
+    <text bindtap="clearAll" wx:if="{{click_num}}">清空</text>
+    <text bindtap="selAuto" wx:else="{{click_num}}">机选</text>
+    <text bindtap="submitNum">提交</text>
+  </view>
+  <view class="calculate">
+        <view class="title">奖金统计</view>
+    </view>
+    <view class="allcontainer">
+        <view class="infobox">
+            <view class="r_text">红球选择号码</view>
+        </view>
+        <view class="reccontainer" wx:if="{{redvalue.length!=0}}">
+            <view data-idx="{{idx}}" wx:for="{{redvalue}}" wx:for-index="idx" wx:for-item="Num" wx:key="idx">
+                <view class="recnumber">{{Num}}</view>
+            </view>
+        </view>
+        <view class="reccontainer" wx:else>
+            <view>
+                <view class="recnumber">未</view>
+                <view class="recnumber">选</view>
+                <view class="recnumber">号</view>
+            </view>
+        </view>
+    </view>
+    <view class="allcontainer">
+        <view class="infobox">
+            <view class="r_text">蓝球选择号码</view>
+        </view>
+        <view class="reccontainer" wx:if="{{bluevalue.length!=0}}">
+            <view data-idx="{{idx}}" wx:for="{{bluevalue}}" wx:for-index="idx" wx:for-item="BNum" wx:key="index">
+                <view class="bluenumber">{{BNum}}</view>
+            </view>
+        </view>
+        <view class="reccontainer" wx:else>
+            <view>
+                <view class="bluenumber">未</view>
+                <view class="bluenumber">选</view>
+                <view class="bluenumber">号</view>
+            </view>
+        </view>
+    </view>
+    <view class="allcontainer" >
+        <view class="infobox">
+            <view class="r_text">红球中奖号码</view>
+        </view>
+        <view class="reccontainer" wx:if="{{red_binggo_number.length!=0}}">
+            <view data-idx="{{idx}}" wx:for="{{red_binggo_number}}" wx:for-index="idx" wx:for-item="BNum" wx:key="index">
+                <view class="recnumber">{{BNum}}</view>
+            </view>
+        </view>
+        <view class="reccontainer" wx:else>
+            <view>
+                <view class="recnumber " style="background-color: rgb(116, 119, 119);">!</view>
+            </view>
+        </view>
+    </view>
+    <view class="allcontainer" >
+        <view class="infobox">
+            <view class="r_text">蓝球中奖号码</view>
+        </view>
+        <view class="reccontainer" wx:if="{{blue_binggo_number.length!=0}}">
+            <view data-idx="{{idx}}" wx:for="{{blue_binggo_number}}" wx:for-index="idx" wx:for-item="BNum" wx:key="index">
+                <view class="bluenumber">{{BNum}}</view>
+            </view>
+        </view>
+        <view class="reccontainer" wx:else>
+            <view>
+                <view class="bluenumber" style="background-color: rgb(116, 119, 119);">!</view>
+            </view>
+        </view>
+    </view>
+    <view class="allcontainer"  style="border-bottom: 1rpx solid #ccd5dd;">
+        <view class="infobox">
+            <view class="r_text">累计奖金统计</view>
+        </view>
+        <view class="reccontainer"  wx:if="{{sum}}">
+            <view>
+                <view>共{{sum}}注,{{2*sum}}元,共获得奖金{{sum_money}}元</view>
+            </view>
+        </view>
+        <view class="reccontainer" wx:else>
+            <view>
+                <view class="bluenumber" style="background-color: rgb(116, 119, 119);">!</view>
+            </view>
+        </view>
+    </view>
+</view>

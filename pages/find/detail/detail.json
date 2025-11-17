@@ -1,0 +1,7 @@
+{
+  "navigationBarBackgroundColor": "#D55B46",
+  "usingComponents": {
+    "countdown": "/components/countdown/countdown"
+    
+  }
+}

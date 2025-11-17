@@ -1,0 +1,45 @@
+function formatNum(str) {
+    var newStr = "";
+    var count = 0;
+    if (str.indexOf(".") == -1) {
+        for (var i = str.length - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr
+            } else {
+                newStr = str.charAt(i) + newStr
+            };
+            count++
+        }
+    } else {
+        for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr
+            } else {
+                newStr = str.charAt(i) + newStr
+            };
+            count++
+        };
+        newStr = newStr + str.substring(str.indexOf("."), str.length)
+    };
+    return (newStr)
+};
+
+function formatMoney(money) {
+    console.log("money", money);
+    money = parseInt(money);
+    var str = '';
+    if (money > 100000000) {
+        money = money.toString();
+        str = money.substring(0, money.length - 8) + '.' + money.substring(money.length - 8, 1) + "亿"
+    } else if (money > 10000) {
+        money = money.toString();
+        str = money.substring(0, money.length - 4) + '.' + money.substring(money.length - 4, 1) + "万"
+    } else {
+        str = money
+    };
+    return (str.toString())
+};
+module.exports = ({
+    formatNum: formatNum,
+    formatMoney: formatMoney,
+});

@@ -1,0 +1,28 @@
+<view class="box">
+    <view bindtap="showDetail" class="flex_row issue_container">
+        <view class="issue">{{prize.code}}期</view>
+        <view class="date"> {{prize.date}}</view>
+        <view class="week">周{{prize.week}}</view>
+        <image class="{{showDetail?'prize_bottom_arrow':'prize_top_arrow'}}" src="https://resource.cgt-cwl.com.cn/image/2021-08-12-prize_top_arrow.png"></image>
+    </view>
+    <view class="flex_row lottery_balls">
+        <view class="ballContainer blue_ball" wx:for="{{prize.redBallList}}" wx:for-item="redBall" wx:key="key">
+            <view class="ballDesc"> {{redBall}}</view>
+        </view>
+    </view>
+    <view wx:if="{{showDetail}}">
+        <view class="flex_row ticket_line">
+            <view class="right_semicircle"></view>
+            <view class="line_dotte"></view>
+            <view class="left_semicircle"></view>
+        </view>
+        <view class="flex_row sales_pool_container">
+            <view class="flex_column pool_container">
+                <view class="pool_money"> {{money.formatNum(prize.sales)}} </view>
+                <view class="pool_desc"> 全国销售总金额(元) </view>
+            </view>
+        </view>
+        <view class="d3_desc"> 3D兑奖当期有效。中奖者应当自开奖之日起60个自然日内，持中奖彩票到指定的地点兑奖。逾期未兑奖视为弃奖，弃奖奖金纳入彩票公益金 </view>
+    </view>
+</view>
+<wxs module="money" src="../../utils/money.wxs" />

@@ -1,0 +1,21 @@
+<!--components/nav/nav.wxml-->
+<view class="rec">
+    <view class="list_des">
+        <view class="top-itempro" style="color:#fff;width: 20%;background: #e60013;border-radius: 5%;">选号推荐</view>
+        <view>
+            <navigator class="info_list" url="/pages/tool/tool">更多>></navigator>
+        </view>
+    </view>
+    <view class="iconbox">
+        <view class="ritem" wx:for="{{iconList}}" wx:for-index="idx" wx:key="idx">
+            <navigator appId="{{item.appid}}" class="iconbox_one" openType="navigate" path="{{item.path}}" target="miniProgram" version="release" wx:if="{{item.type=='miniprogram'}}">
+                <image data-id="{{item}}" mode="widthFix" src="{{item.iconurl}}"></image>
+                <view data-id="{{item.name}}">{{item.name}}</view>
+            </navigator>
+            <navigator  url="{{item.path}}" wx:if="{{item.type=='navigation'}}">
+                <image data-id="{{item}}" mode="widthFix" src="{{item.iconurl}}"></image>
+                <view data-id="{{item.name}}">{{item.name}}</view>
+            </navigator>
+        </view>
+    </view>
+</view>

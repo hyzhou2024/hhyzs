@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+
+      "mine": "../../components/mine/mine"
+  
+    }
+}

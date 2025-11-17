@@ -1,0 +1,52 @@
+/* components/nav/nav.wxss */
+.rec {
+
+    font-size: 30rpx;
+    margin: 0 auto;
+    padding: 10rpx 2%;
+    width: 98%;
+    border: 5rpx solid #152e52;
+}
+.list_des {
+    align-items: center;
+    display: flex;
+    height: 50rpx;
+    justify-content: space-between
+}
+.top-itempro {
+    align-items: center;
+}
+.info_list {
+    color: #0eadec;
+    font-family: Trebuchet MS,Lucida Sans Unicode,Lucida Grande,Lucida Sans,Arial,sans-serif;
+    font-size: 26rpx;
+    font-style: italic;
+}
+.iconbox {
+    align-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 18rpx;
+    margin: 10rpx auto;
+    width: 98%;
+}
+
+.ritem {
+    box-sizing: border-box;
+    margin-bottom: 20rpx;
+    margin-top: 20rpx;
+    text-align: center;
+    width: 25%;
+}
+
+.ritem image {
+    border-radius: 50%;
+    height: 80rpx;
+    width: 80rpx;
+}
+
+.iconbox_one {
+    margin: 5rpx;
+    background-color: aquamarine;
+}

@@ -1,0 +1,16 @@
+{
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+    "usingComponents": {
+        "ssq": "../../components/ssq/ssq",
+        "time": "../../components/time/time",
+        "ssqv1": "../../components/ssqv1/ssqv1",
+        "fc3d": "../../components/fc3d/fc3d",
+        "dlt": "../../components/dlt/dlt",
+        "ssqrec": "../../components/ssqrec/ssqrec",
+        "article": "../../components/article/article",
+        "article1": "../../components/article1/article1",
+        "pc": "../../components/prize_count/prize_count"
+    
+      }
+}

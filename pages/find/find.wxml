@@ -1,0 +1,5 @@
+<!-- <open ></open> -->
+<!-- <article1 class="art" wx:if="{{content_type == '视频'}}" content_type="{{content_type}}" ></article1> -->
+<article1 class="art" wx:if="{{content_type == '小鸭子简笔画' &&config.showCheck}}" content_type="{{content_type}}"></article1>
+<!-- <ssqtq></ssqtq> -->
+<luck config="{{config}}" wx:if="{{config.showLottery}}"></luck>

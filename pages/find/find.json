@@ -1,0 +1,9 @@
+{
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#D55B46",
+  "usingComponents": {
+    "article1": "../../components/article1/article1",
+    "luck": "../../components/luck/luck"
+  }
+}

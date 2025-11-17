@@ -1,0 +1,132 @@
+page {
+  color: #333;
+}
+image{
+    border-radius: 50%;
+    width: 80rpx;
+    height: 80rpx;
+  
+}
+.money_container{
+  background: linear-gradient(0deg, rgba(220, 87, 68, 1), rgba(213, 91, 70, 1));
+  color: #ebd4d4;
+  height: 420rpx;
+  border-radius: 0  0 50rpx 22rpx;
+}
+.money_container .h1{
+  margin: 0 auto;
+  font-size: 36rpx;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.money_container .h2{
+  margin: 12rpx auto;
+  font-size: 100rpx;
+  color: rgba(254,214,155,1);
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.tx{
+  display: flex;
+  background-color: blueviolet;
+  color: floralwhite; 
+  font-size: 50rpx;
+  align-items: center;
+}
+.money_container .h3{
+  margin: 2rpx auto;
+  font-size: 32rpx;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30rpx;
+  
+}
+
+.hongbao {
+  margin: 50rpx auto;
+  background: linear-gradient(0deg, rgba(220, 87, 68, 1), rgba(213, 91, 70, 1));
+  width: 88%;
+  height: 888rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.top {
+  width: 100%;
+  background: linear-gradient(0deg, rgba(220, 87, 68, 1), rgba(213, 91, 70, 1));
+  height: 300rpx;
+  border-radius: 0rpx 0rpx 68% 68% / 0rpx 0rpx 25% 25%;
+  box-shadow:0px 7rpx 30rpx 0px rgba(157,60,26,1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-open{
+  width: 220rpx;
+  height: 220rpx;
+  margin: 0 auto;
+  margin-top: -110rpx;
+  border-radius: 50%;
+  background:rgba(254,214,155,1);
+  box-shadow:0px 7rpx 30rpx 0px rgba(157,60,26,1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 100rpx;
+  font-weight: bold;
+  color: #DA5844;
+}
+.max_luck{
+  margin-top: 100rpx;
+  font-size: 50rpx;
+  color: rgba(254,214,155,1);
+}
+.box{
+  width: 96%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  margin: 20rpx auto;
+  justify-content: space-between;
+}
+.vitem{
+  box-sizing: border-box;
+  width: 50%;
+  line-height: 50px;
+  text-align: center;
+}
+.val{
+  display:inline-block;
+  width: 90%;
+  line-height: 54rpx;
+  font-size: 32rpx;
+  border: 1px solid #DA5844;
+  background-color: floralwhite;
+  color: #DA5844;
+  align-items: center;
+  justify-items: center;
+}
+.is_checked{
+  background: #DA5844;
+  color: aliceblue;
+}
+.tx_btn{
+  display: flex;
+  background-color: #DA5844;
+  border: 1rpx solid #DA5844;
+  align-items: center;
+  width: 50%;
+  height: 80rpx;
+  margin: 0 auto;
+}
+.tx_btn .text{
+  margin: 0 auto;
+  color: #ffffff;
+}

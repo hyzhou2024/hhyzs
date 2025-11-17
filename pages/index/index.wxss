@@ -1,0 +1,46 @@
+page {
+  font-size: 30rpx;
+  color: #fdf9f9;
+  background-color: #022a63;
+}
+.prize_type_container {
+  align-items: center;
+  background: #011d44;
+  justify-content: space-around;
+}
+
+.swiper_tab {
+  left: 0;
+  line-height: 60rpx;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.flex_column {
+  flex-direction: column;
+}
+
+.swiper_tab_list {
+  align-items: center;
+  display: inline-flex;
+  flex: 1;
+  position: relative;
+  width: 25%;
+ 
+}
+
+.on {
+  font-family: Akrobat-Black;
+  font-weight: 900;
+  background-color: #022a63;
+  width: 100%;
+ 
+
+}
+
+.of {
+  font-family: Akrobat-Black;
+  font-weight: 300;
+}

@@ -1,0 +1,261 @@
+<view class='container1' wx:if="{{config.showLottery}}">
+    <!-- 开奖号码 -->
+    <view class="open-number-box">
+        <view wx:if="{{ssq.detail.OpenNumber}}">
+            <text>第<text id='newLastOpenIssueName'>{{ssq.detail.Name}}</text>期开奖号码</text>
+            <view class='open-number'>
+                <block wx:for="{{ssq.detail.OpenNumber.hq}}" wx:for-item="Num" wx:key="hq">
+                    <text>{{Num}}</text>
+                </block>
+                <block wx:for="{{ssq.detail.OpenNumber.lq}}" wx:for-item="Num" wx:key="lq">
+                    <text class='blue-ball'>{{Num}}</text>
+                </block>
+                <navigator url='../opendetail/opendetail?name=ssqlist' class='moveinfo'>
+                    <image src='../../images/youjiantou.png'></image>
+                </navigator>
+            </view>
+        </view>
+        <view wx:else>
+            <text>第<text id='newLastOpenIssueName'>{{ssq.detail.Name}}</text>期正在开奖</text>
+            <view class='open-number'>
+                <text>?</text>
+                <text>?</text>
+                <text>?</text>
+                <text>?</text>
+                <text>?</text>
+                <text>?</text>
+                <text class='blue-ball'>?</text>
+            </view>
+        </view>
+
+    </view>
+    <scroll-view scrollX="true" class="prize_type_container ">
+        <view class="swiper_tab_list flex_column " wx:for="{{ssq.detail.top_tab}}" wx:for-index="idx" wx:key="idx">
+            <view bindtap="swichNav" class="{{currentTab==item.id?'on':'of'}}" data-id="{{item.id}}" >{{item.tab_name}}</view>
+        </view>
+    </scroll-view>
+    <block wx:if="{{currentTab ==0}}">
+        <view class='analyze-title box'>{{ssq.detail.NextIssue}}期大数据智能分析器
+            <text>分析<text class='col-pink'>100</text>期</text>
+        </view>
+
+        <view>
+            <view class="ssq_container_red">
+                <view wx:for="{{ssq_default_data.redBall}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="ssq_num_red       {{item.selected?'ssq_num_red_select':''}}">
+                    <view>
+                        {{item.num}}
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="ssq_container_blue">
+            <view wx:for="{{ssq_default_data.blueBall}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="ssq_num_blue {{item.selected?'ssq_num_blue_select':''}}">
+                <view>
+                    {{item.num}}
+                </view>
+            </view>
+        </view>
+        <!-- 分析动画 -->
+        <view class='animate-box'>
+            <image src='../../images/circle.png' class="circle circle-ani"></image>
+            <image src='../../images/ball.png' class='ball ball-ani'></image>
+            <image src='../../images/swipe.png' class="swipe {{num5==0?'transparent':''}} {{num5==0?'':'swipe-ani'}}"></image>
+            <image src='../../images/hot-num.png' class='hot-num' bindtap="animate1"></image>
+            <image src='../../images/cold-num.png' class='cold-num' bindtap="animate2"></image>
+            <image src='../../images/kill-num.png' class='kill-num' bindtap="animate3"></image>
+            <image src='../../images/rec-num.png' class='rec-num' bindtap="animate4"></image>
+            <view class="recommend number box {{num1==0?'transparent':''}}" animation="{{animation1}}">
+                <view class="cu-dialog">
+                    <view class="cu-bar bg-gradual-green justify-end">
+                        <view class="content">热门号码</view>
+                        <view bindtap="animate1default" class="action">
+                            <text class="cuIcon-close text-orange"></text>
+                        </view>
+                    </view>
+                    <view class="padding-xl bg-white" wx:if='{{isShowAd[0]}}'>
+                        <view>查看推荐需要看完视频哦！</view>
+                        <view wx:if="{{redhot.hot_num_list}}">
+                            <view class="ssq_container_red_rec">
+                                <block wx:for="{{redhot.hot_num_list}}" wx:for-item="red" wx:key="idx">
+                                    <view class="ssq_num_red_select ssq_num_redw border">?</view>
+                                </block>
+                                <block wx:for="{{bluehot.hot_num_list}}" wx:for-item="bluelist" wx:key="idx">
+                                    <view class="ssq_num_blue_select ssq_num_bluew border">?</view>
+                                </block>
+
+                            </view>
+                        </view>
+                        
+                        <view class="cu-bar bg-white">
+                            <view bindtap="animate1default" class="action margin-0 flex-sub ">算了</view>
+                            <view bindtap="onIconClicked" class="action margin-0 flex-sub text-orange solid-left" data-id="rm"> 立即观看 </view>
+                        </view>
+                    </view>
+                    <view class="padding-xl bg-white" wx:else>
+                        <view>查看推荐需要看完视频哦！</view>
+                        <view wx:if="{{redhot.hot_num_list}}">
+                            <view class="ssq_container_red_rec">
+                                <block wx:for="{{redhot.hot_num_list}}" wx:for-item="red" wx:key="idx">
+                                    <view class="ssq_num_red_select ssq_num_redw border">{{red.num}}</view>
+                                </block>
+                                <block wx:for="{{bluehot.hot_num_list}}" wx:for-item="bluelist" wx:key="idx">
+                                    <view class="ssq_num_blue_select ssq_num_bluew border">{{bluelist.num}}</view>
+                                </block>
+
+                            </view>
+                        </view>
+                        <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+                       
+                    </view>
+
+                </view>
+
+            </view>
+            <view class="recommend number box {{num2==0?'transparent':''}}" animation="{{animation2}}">
+
+                <view class="cu-dialog">
+                    <view class="cu-bar bg-gradual-green justify-end">
+                        <view class="content">冷门号码</view>
+                        <view bindtap="animate2default" class="action">
+                            <text class="cuIcon-close text-orange"></text>
+                        </view>
+                    </view>
+                    <view class="padding-xl bg-white" wx:if='{{isShowAd[1]}}'>
+                        <view>查看推荐需要看完视频哦！</view>
+                        <view wx:if="{{redhot.cold_num_list}}">
+                            <view class="ssq_container_red_rec">
+                                <block wx:for="{{redhot.cold_num_list}}" wx:for-item="red" wx:key="idx">
+                                    <view class="ssq_num_red_select ssq_num_redw border">?</view>
+                                </block>
+                                <block wx:for="{{bluehot.cold_num_list}}" wx:for-item="bluelist" wx:key="idx">
+                                    <view class="ssq_num_blue_select ssq_num_bluew border">?</view>
+                                </block>
+
+                            </view>
+                        </view>
+                        
+                        <view class="cu-bar bg-white">
+                            <view bindtap="animate2default" class="action margin-0 flex-sub ">算了</view>
+                            <view bindtap="onIconClicked" class="action margin-0 flex-sub text-orange solid-left" data-id="lm"> 立即观看 </view>
+                        </view>
+                    </view>
+                    <view class="padding-xl bg-white" wx:else>
+                        <view wx:if="{{redhot.cold_num_list}}">
+                            <view class="ssq_container_red_rec">
+                                <block wx:for="{{redhot.cold_num_list}}" wx:for-item="red" wx:key="idx">
+                                    <view class="ssq_num_red_select ssq_num_redw border">{{red.num}}</view>
+                                </block>
+                                <block wx:for="{{bluehot.cold_num_list}}" wx:for-item="bluelist" wx:key="idx">
+                                    <view class="ssq_num_blue_select ssq_num_bluew border">{{bluelist.num}}</view>
+                                </block>
+
+                            </view>
+                        </view>
+                        <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+                       
+                    </view>
+                </view>
+
+
+            </view>
+            <view class="recommend number box {{num3==0?'transparent':''}}" animation="{{animation3}}">
+                <view class="cu-dialog">
+                    <view class="cu-bar bg-gradual-green justify-end">
+                        <view class="content">杀号</view>
+                        <view bindtap="animate3default" class="action">
+                            <text class="cuIcon-close text-orange"></text>
+                        </view>
+                    </view>
+                    <view class="padding-xl bg-white" wx:if='{{isShowAd[2]}}'>
+                        <view>查看推荐需要看完视频哦！</view>
+                        <view wx:if="{{redhot.num_kill}}">
+                            <view class="ssq_container_red_rec">
+                                <block wx:for="{{redhot.num_kill}}" wx:for-item="red" wx:key="idx">
+                                    <view class="ssq_num_red_select ssq_num_redw border">?</view>
+                                </block>
+                                <block wx:for="{{bluehot.num_kill}}" wx:for-item="bluelist" wx:key="idx">
+                                    <view class="ssq_num_blue_select ssq_num_bluew border">?</view>
+                                </block>
+
+                            </view>
+                        </view>
+                        
+                        <view class="cu-bar bg-white">
+                            <view bindtap="animate3default" class="action margin-0 flex-sub ">算了</view>
+                            <view bindtap="onIconClicked" class="action margin-0 flex-sub text-orange solid-left" data-id="kill"> 立即观看 </view>
+                        </view>
+                    </view>
+                    <view class="padding-xl bg-white" wx:else>
+                        <view wx:if="{{redhot.num_kill}}">
+                            <view class="ssq_container_red_rec">
+                                <block wx:for="{{redhot.num_kill}}" wx:for-item="red" wx:key="idx">
+                                    <view class="ssq_num_red_select ssq_num_redw border">{{red.num}}</view>
+                                </block>
+                                <block wx:for="{{bluehot.num_kill}}" wx:for-item="bluelist" wx:key="idx">
+                                    <view class="ssq_num_blue_select ssq_num_bluew border">{{bluelist.num}}</view>
+                                </block>
+
+                            </view>
+                        </view>
+                        <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+                       
+                    </view>
+                </view>
+
+            </view>
+            <view class="recommend number  {{num4==0?'transparent':''}}" animation="{{animation4}}">
+                <view>
+                    <view class="cu-bar bg-gradual-green justify-end">
+                        <view class="content">推荐</view>
+                        <view bindtap="animate4default" class="action">
+                            <text class="cuIcon-close text-orange"></text>
+                        </view>
+                    </view>
+                    <view class="padding-xl bg-white" wx:if='{{isShowAd[3]}}'>
+                        <view>查看推荐需要看完视频哦！</view>
+                        <view wx:if="{{redhot.num_rec}}">
+                            <view class="ssq_container_red_rec">
+                                <block wx:for="{{redhot.num_rec}}" wx:for-item="red" wx:key="idx">
+                                    <view class="ssq_num_red_select ssq_num_redw border">?</view>
+                                </block>
+                                <block wx:for="{{bluehot.num_rec}}" wx:for-item="bluelist" wx:key="idx">
+                                    <view class="ssq_num_blue_select ssq_num_bluew border">?</view>
+                                </block>
+
+                            </view>
+                        </view>
+                        
+                        <view class="cu-bar bg-white">
+                            <view bindtap="animate4default" class="action margin-0 flex-sub ">算了</view>
+                            <view bindtap="onIconClicked" class="action margin-0 flex-sub text-orange solid-left" data-id="rec"> 立即观看 </view>
+                        </view>
+                    </view>
+                    <view class="padding-xl bg-white" wx:else>
+                        <view wx:if="{{redhot.num_rec}}">
+                            <view class="ssq_container_red_rec">
+                                <block wx:for="{{redhot.num_rec}}" wx:for-item="red" wx:key="idx">
+                                    <view class="ssq_num_red_select ssq_num_redw border">{{red.num}}</view>
+                                </block>
+                                <block wx:for="{{bluehot.num_rec}}" wx:for-item="bluelist" wx:key="idx">
+                                    <view class="ssq_num_blue_select ssq_num_bluew border">{{bluelist.num}}</view>
+                                </block>
+
+                            </view>
+                        </view>
+                        <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+                       
+                    </view>
+                </view>
+            </view>
+        </view>
+        <nav></nav>
+    </block>
+    <view wx:for="{{ssq.detail.top_tab}}" wx:for-index="idx" wx:key="idx" >
+    <view hidden="{{currentTab!=idx}}">
+        <ssqtq wx:if="{{item.id == 1}}" class="ssqtq" config="{{config}}" ssq="{{ssq}}"></ssqtq>
+        <pc wx:if="{{item.id == 2}}" class="ssqpc" config="{{config}}" ssq="{{ssq}}"></pc>
+    </view>
+</view>
+   
+</view>
