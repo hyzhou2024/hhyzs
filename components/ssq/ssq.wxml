@@ -63,7 +63,7 @@
         </view>
 
         <!-- 历史开奖入口 -->
-        <navigator class="history-link" url="../lotterylist/lotterylist?lotId=5&lotName=双色球往期&typeId=1">
+        <navigator class="history-link" url="../../pages/opendetail/opendetail?name=ssqlist">
           <text class="link-text">往期开奖</text>
           <view class="arrow-icon">››</view>
           <view class="link-glow"></view>
@@ -110,7 +110,7 @@
     </view>
     
 </view>
-<nav></nav>
+<nav config="{{config}}"></nav>
 <view class="bonus-table">
         <view class="bonus-item item1">
             <view class="bigsize">奖级</view>

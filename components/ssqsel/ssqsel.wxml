@@ -1,0 +1,360 @@
+<view class="container" wx:if="{{config.showLottery}}">
+  <!-- 顶部标题区域 -->
+  <view class="header-section">
+    <view class="header-content">
+      <text class="main-title">双色球选号工具</text>
+      <text class="sub-title">红球33选6 • 蓝球16选1 • 智能分析</text>
+    </view>
+  </view>
+
+  <!-- 主内容区域 -->
+  <scroll-view class="main-content" scroll-y="true">
+    
+    <!-- 选号面板 -->
+    <view class="selection-card">
+      <view class="card-header">
+        <text class="card-title">选号面板</text>
+        <view class="selection-info">
+          <text class="info-text">红球：{{redSelectedCount}}/6</text>
+          <text class="info-text">蓝球：{{blueSelectedCount}}/1</text>
+          <text class="info-text">组合：{{combinationCount}}注</text>
+        </view>
+      </view>
+
+      <!-- 红球选号 -->
+      <view class="red-ball-section">
+        <view class="section-header">
+          <text class="section-title">红球选择（33选6）</text>
+          <view class="section-actions">
+            <text class="action-btn" bindtap="selectAllRed">全选</text>
+            <text class="action-btn" bindtap="clearRed">清空</text>
+            <text class="action-btn" bindtap="randomRed">随机</text>
+          </view>
+        </view>
+        <view class="red-ball-grid">
+          <view class="ball-cell {{redSelected[index] ? 'selected' : ''}} {{isHotRedBall(index+1) ? 'hot' : ''}}" 
+                wx:for="{{redBalls}}" wx:key="index"
+                bindtap="selectRedBall" data-index="{{index}}">
+            <text class="ball-number">{{item < 10 ? '0' + item : item}}</text>
+            <text class="hot-badge" wx:if="{{isHotRedBall(index+1)}}">热</text>
+            <text class="selection-order" wx:if="{{redSelected[index]}}">
+              {{getRedSelectionOrder(index)}}
+            </text>
+          </view>
+        </view>
+        <view class="selected-preview" wx:if="{{redSelectedCount > 0}}">
+          <text class="preview-label">已选红球号码：</text>
+          <view class="selected-chips">
+            <view class="chip" wx:for="{{redSelectedList}}" wx:key="index">
+              <text class="chip-text">{{item < 10 ? '0' + item : item}}</text>
+              <text class="chip-remove" bindtap="removeRedBall" data-ball="{{item}}">×</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 蓝球选号 -->
+      <view class="blue-ball-section">
+        <view class="section-header">
+          <text class="section-title">蓝球选择（16选1）</text>
+          <view class="section-actions">
+            <text class="action-btn" bindtap="selectAllBlue">全选</text>
+            <text class="action-btn" bindtap="clearBlue">清空</text>
+            <text class="action-btn" bindtap="randomBlue">随机</text>
+          </view>
+        </view>
+        <view class="blue-ball-grid">
+          <view class="blue-ball-cell {{blueSelected[index] ? 'selected' : ''}} {{isHotBlueBall(index+1) ? 'hot' : ''}}" 
+                wx:for="{{blueBalls}}" wx:key="index"
+                bindtap="selectBlueBall" data-index="{{index}}">
+            <text class="ball-number">{{item < 10 ? '0' + item : item}}</text>
+            <text class="hot-badge" wx:if="{{isHotBlueBall(index+1)}}">热</text>
+            <text class="selection-order" wx:if="{{blueSelected[index]}}">
+              {{getBlueSelectionOrder(index)}}
+            </text>
+          </view>
+        </view>
+        <view class="selected-preview blue-selected-preview" wx:if="{{blueSelectedCount > 0}}">
+          <text class="preview-label blue-preview-label">已选蓝球号码：</text>
+          <view class="selected-chips">
+            <view class="chip blue-chip" wx:for="{{blueSelectedList}}" wx:key="index">
+              <text class="chip-text blue-chip-text">{{item < 10 ? '0' + item : item}}</text>
+              <text class="chip-remove" bindtap="removeBlueBall" data-ball="{{item}}">×</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 快捷操作 -->
+      <view class="quick-actions">
+        <view class="quick-btn" bindtap="generateRandom">
+          <text class="quick-icon">🎲</text>
+          <text class="quick-text">随机一注</text>
+        </view>
+        <view class="quick-btn" bindtap="generateSmart">
+          <text class="quick-icon">🧠</text>
+          <text class="quick-text">智能选号</text>
+        </view>
+        <view class="quick-btn" bindtap="generatePattern">
+          <text class="quick-icon">📊</text>
+          <text class="quick-text">规律选号</text>
+        </view>
+        <view class="quick-btn" bindtap="generateDouble">
+          <text class="quick-icon">🔢</text>
+          <text class="quick-text">复式选号</text>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="action-buttons">
+        <button class="btn clear" bindtap="clearSelection">清空选择</button>
+        <button class="btn add" bindtap="addToResult">添加到结果</button>
+        <button class="btn batch" bindtap="generateBatch">批量生成</button>
+      </view>
+    </view>
+
+    <!-- 筛选条件 -->
+    <view class="filter-card">
+      <view class="card-header">
+        <text class="card-title">筛选条件</text>
+        <view class="filter-status">
+          <text class="status-badge {{activeFilterCount > 0 ? 'active' : ''}}">
+            {{activeFilterCount > 0 ? '筛选中(' + activeFilterCount + ')' : '未筛选'}}
+          </text>
+        </view>
+      </view>
+
+      <!-- 号码分布条件 -->
+      <view class="filter-group">
+        <text class="group-label">号码分布</text>
+        <view class="distribution-filters">
+          <!-- 红球奇偶比 -->
+          <view class="distribution-filter">
+            <text class="distribution-label">红球奇偶比</text>
+            <view class="distribution-options">
+              <view class="distribution-option {{filters.redOddEven === item.value ? 'selected' : ''}}"
+                    wx:for="{{redOddEvenRatios}}" wx:key="value"
+                    bindtap="setRedOddEven" data-ratio="{{item.value}}">
+                <text class="option-text">{{item.name}}</text>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 红球大小比 -->
+          <view class="distribution-filter">
+            <text class="distribution-label">红球大小比</text>
+            <view class="distribution-options">
+              <view class="distribution-option {{filters.redSizeRatio === item.value ? 'selected' : ''}}"
+                    wx:for="{{redSizeRatios}}" wx:key="value"
+                    bindtap="setRedSizeRatio" data-ratio="{{item.value}}">
+                <text class="option-text">{{item.name}}</text>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 和值范围 -->
+          <view class="distribution-filter">
+            <text class="distribution-label">红球和值范围</text>
+            <view class="sum-range-controls">
+              <input class="range-input" type="number" value="{{filters.redSumRange[0]}}" 
+                     placeholder="21" bindinput="setRedSumRange" data-index="0"/>
+              <text class="range-separator">-</text>
+              <input class="range-input" type="number" value="{{filters.redSumRange[1]}}" 
+                     placeholder="183" bindinput="setRedSumRange" data-index="1"/>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 连号条件 -->
+      <view class="filter-group">
+        <text class="group-label">连号设置</text>
+        <view class="consecutive-filters">
+          <view class="consecutive-filter">
+            <text class="consecutive-label">红球连号</text>
+            <view class="consecutive-options">
+              <view class="consecutive-option {{filters.redConsecutive === item.value ? 'selected' : ''}}"
+                    wx:for="{{consecutiveOptions}}" wx:key="value"
+                    bindtap="setRedConsecutive" data-value="{{item.value}}">
+                <text class="option-text">{{item.name}}</text>
+                <text class="option-desc">{{item.desc}}</text>
+              </view>
+            </view>
+          </view>
+          
+          <view class="consecutive-filter">
+            <text class="consecutive-label">AC值范围</text>
+            <view class="ac-value-options">
+              <view class="ac-option {{filters.acValue === item ? 'selected' : ''}}"
+                    wx:for="{{acValues}}" wx:key="index"
+                    bindtap="setAcValue" data-value="{{item}}">
+                <text class="option-text">{{item || '不限'}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 区间分布 -->
+      <view class="filter-group">
+        <text class="group-label">区间分布</text>
+        <view class="zone-filters">
+          <view class="zone-filter" wx:for="{{zoneOptions}}" wx:key="zone">
+            <text class="zone-label">{{item.name}}区（{{item.range}}）</text>
+            <view class="zone-controls">
+              <text class="zone-btn" bindtap="decreaseZone" data-zone="{{item.zone}}">-</text>
+              <text class="zone-value">{{getZoneCount(item.zone)}}</text>
+              <text class="zone-btn" bindtap="increaseZone" data-zone="{{item.zone}}">+</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 筛选标签 -->
+      <view class="filter-tags" wx:if="{{activeFilterCount > 0}}">
+        <view class="filter-tag" wx:for="{{activeFilterTags}}" wx:key="key">
+          <text class="tag-text">{{item.text}}</text>
+          <text class="tag-remove" bindtap="removeFilterTag" data-key="{{item.key}}">×</text>
+        </view>
+        <text class="clear-all-tags" bindtap="clearAllFilterTags">清除所有</text>
+      </view>
+
+      <!-- 筛选操作 -->
+      <view class="filter-actions">
+        <view class="action-btn reset" bindtap="resetFilters">
+          <text class="btn-icon">🔄</text>
+          <text>重置筛选</text>
+        </view>
+        <view class="action-btn preview" bindtap="previewFilter">
+          <text class="btn-icon">👁️</text>
+          <text>预览结果</text>
+        </view>
+        <view class="action-btn apply" bindtap="applyFilters">
+          <text class="btn-icon">✅</text>
+          <text>应用筛选</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 结果展示 -->
+    <view class="result-card">
+      <view class="card-header">
+        <text class="card-title">选号结果</text>
+        <view class="result-stats">
+          <text class="stat-item">总数：{{filteredResults.length}}注</text>
+          <text class="stat-item">保留：{{filterRate}}%</text>
+          <text class="stat-item">页数：{{currentPage}}/{{totalPages}}</text>
+        </view>
+      </view>
+
+      <view class="results-container">
+        <!-- 加载状态 -->
+        <view class="loading-results" wx:if="{{isLoading}}">
+          <view class="loading-spinner"></view>
+          <text class="loading-text">加载中...</text>
+        </view>
+        
+        <!-- 结果网格 -->
+        <view class="results-grid" wx:elif="{{filteredResults.length > 0}}">
+          <view class="result-item {{item.isSpecial ? 'special-combination' : ''}}" 
+                wx:for="{{currentPageResults}}" wx:key="index" 
+                wx:for-index="resultIndex">
+            
+            <!-- 双色球号码显示 -->
+            <view class="ssq-number">
+              <!-- 红球号码 -->
+              <view class="red-number-group">
+                <text class="result-number red-number {{isHotRedBall(number) ? 'highlight-number' : ''}}" 
+                      wx:for="{{item.redNumbers}}" wx:key="index" wx:for-item="number">
+                  {{number < 10 ? '0' + number : number}}
+                </text>
+              </view>
+              
+              <!-- 分隔符 -->
+              <text class="plus-sign">+</text>
+              
+              <!-- 蓝球号码 -->
+              <view class="blue-number-group">
+                <text class="result-number blue-number {{isHotBlueBall(item.blueNumber) ? 'highlight-number' : ''}}">
+                  {{item.blueNumber < 10 ? '0' + item.blueNumber : item.blueNumber}}
+                </text>
+              </view>
+            </view>
+            
+            <!-- 分析信息 -->
+            <view class="result-info">
+              <text class="info-item sum">
+                <text class="info-label">和值</text>
+                <text class="info-value">{{item.sum}}</text>
+              </text>
+              
+              <text class="info-item odd-even">
+                <text class="info-label">奇偶比</text>
+                <text class="info-value">{{item.oddEvenRatio}}</text>
+              </text>
+              
+              <text class="info-item size">
+                <text class="info-label">大小比</text>
+                <text class="info-value">{{item.sizeRatio}}</text>
+              </text>
+              
+              <text class="info-item ac">
+                <text class="info-label">AC值</text>
+                <text class="info-value">{{item.acValue}}</text>
+              </text>
+              
+              <text class="info-item consecutive" wx:if="{{item.consecutiveCount > 0}}">
+                <text class="info-label">连号组数</text>
+                <text class="info-value">{{item.consecutiveCount}}组</text>
+              </text>
+            </view>
+            
+            <!-- 结果序号 -->
+            <view class="result-index">
+              <text class="index-badge">#{{resultIndex + 1 + (currentPage - 1) * pageSize}}</text>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 空状态 -->
+        <view class="empty-state" wx:else>
+          <text class="empty-icon">🎯</text>
+          <text class="empty-text">暂无选号结果</text>
+          <text class="empty-tip">请选择号码并添加到结果列表，或调整筛选条件</text>
+        </view>
+      </view>
+
+      <!-- 分页控制 -->
+      <view class="pagination" wx:if="{{totalPages > 1}}">
+        <view class="page-info">
+          <text class="page-info-text">第 {{currentPage}}/{{totalPages}} 页</text>
+          <text class="page-info-text">每页 {{pageSize}} 注，共 {{filteredResults.length}} 注</text>
+        </view>
+        <view class="page-controls">
+          <button class="page-btn" bindtap="prevPage" disabled="{{currentPage === 1}}">
+            ← 上一页
+          </button>
+          <button class="page-btn" bindtap="nextPage" disabled="{{currentPage === totalPages}}">
+            下一页 →
+          </button>
+        </view>
+      </view>
+
+      <!-- 结果操作 -->
+      <view class="result-actions" wx:if="{{filteredResults.length > 0}}">
+        <view class="result-btn" bindtap="clearResults">
+          <text class="btn-icon">🗑️</text>
+          <text class="result-btn-text">清空结果</text>
+        </view>
+        <view class="result-btn" bindtap="exportResults">
+          <text class="btn-icon">📤</text>
+          <text class="result-btn-text">导出结果</text>
+        </view>
+        <view class="result-btn" bindtap="saveResults">
+          <text class="btn-icon">💾</text>
+          <text class="result-btn-text">保存方案</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

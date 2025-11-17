@@ -11,6 +11,7 @@
         "article": "../../components/article/article",
         "article1": "../../components/article1/article1",
         "pc": "../../components/prize_count/prize_count"
+        
     
       }
 }

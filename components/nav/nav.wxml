@@ -1,5 +1,5 @@
 <!-- components/nav/nav.wxml -->
-<view class="nav-container">
+<view class="nav-container" wx:if="{{config.showLottery}}">
     <!-- 标题区域 -->
     <view class="nav-header">
         <view class="nav-title-wrapper">

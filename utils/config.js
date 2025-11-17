@@ -3,7 +3,7 @@ const url1 = 'https://minidataservice.com/video'
 const type ='hlly1.0.0'
 const app_name = 'test'
 const mini_app_name = '好好运助手'
-const version = "1.0.0.000"
+const version = "1.0.0.001"
 const Y=650
 module.exports = {
     Y:Y,

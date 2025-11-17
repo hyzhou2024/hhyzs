@@ -105,7 +105,7 @@
 
                             </view>
                         </view>
-                        <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+                        <ad unit-id="adunit-218426ee4609b361" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
                        
                     </view>
 
@@ -152,7 +152,7 @@
 
                             </view>
                         </view>
-                        <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+                        <ad unit-id="adunit-218426ee4609b361" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
                        
                     </view>
                 </view>
@@ -198,7 +198,7 @@
 
                             </view>
                         </view>
-                        <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+                        <ad unit-id="adunit-218426ee4609b361" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
                        
                     </view>
                 </view>
@@ -243,7 +243,7 @@
 
                             </view>
                         </view>
-                        <ad unit-id="adunit-178116156ea8557c" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
+                        <ad unit-id="adunit-218426ee4609b361" ad-type="video" ad-theme="white" bindload="adLoad" binderror="adError" bindclose="adClose"></ad>
                        
                     </view>
                 </view>

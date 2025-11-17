@@ -13,7 +13,8 @@
     "pages/find/detail/detail",
     "pages/hb/tx",
     "pages/hb/hb",
-    "pages/record/record"
+    "pages/record/record",
+    "pages/seltool/seltool"
   ],
   "window": {
     "navigationBarTextStyle": "white",

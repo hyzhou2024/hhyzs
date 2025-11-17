@@ -66,7 +66,7 @@ Page({
       await that.queryLuckDetail(options.issue, options.id)
       // console.log(that.data.activity)
       await that.checkUserorder(that.data.activity.issue)
-      that.loadInterstitialAd('adunit-9088db88e34e3b41');
+      that.loadInterstitialAd('adunit-ab92c31962bd70a7');
 
 
     } else {

@@ -16,3 +16,4 @@
 </view>
 
 <article class="art"  wx:if="{{config.showCheck}}"></article>
+

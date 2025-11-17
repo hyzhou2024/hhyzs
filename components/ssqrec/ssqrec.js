@@ -446,7 +446,7 @@ Component({
             console.log(e.currentTarget.dataset.id)
             var id = e.currentTarget.dataset.id
             var videoAd = wx.createRewardedVideoAd({
-                adUnitId: 'adunit-9088db88e34e3b41'
+                adUnitId: 'adunit-ab92c31962bd70a7'
             })
             if (id == 'rm') {
                 videoAd.show().catch(() => {

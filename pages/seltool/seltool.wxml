@@ -1,0 +1,2 @@
+<topic wx:if="{{config.showCheck}}"></topic>
+<ssqsel config ='{{config}}' wx:if="{{config.showLottery}}"></ssqsel>

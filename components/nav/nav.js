@@ -8,6 +8,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    config: {
+        type: Object,
+        value: null,
+    }
 
   },
   lifetimes: {
@@ -36,7 +40,7 @@ Component({
         let that  = this
         let data = {
             type: 'redis',
-            key:'hlzs_nav'
+            key:'hhyzs_nav'
         }
         let res = await api.request('post', config.url, data);
         console.log('hlzs_nav',res)
